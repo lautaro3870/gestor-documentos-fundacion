@@ -1,0 +1,6 @@
+.div2 {
+  display: "flex";
+  justify-content: "center";
+  flex-direction: "row";
+  gap: "1rem";
+}
