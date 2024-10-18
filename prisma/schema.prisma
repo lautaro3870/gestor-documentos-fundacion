@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model personal {
+  id Int @unique
+  nombre String
+  activo Boolean
+  proyectos equipoxproyecto[]
+}
+
+model proyectos {
+  id       Int          @unique
+  titulo   String?
+  activo   Boolean?
+  mes_inicio Int?
+  anio_inicio Int?
+  departamento String?
+  pdf String?
+  mes_finalizacion Int?
+  anio_finalizacion Int?
+  descripcion String?
+  cita String?
+
+  areas    areasxproyecto[]
+  personal equipoxproyecto[]
+}
+
+model areas {
+  id     Int    @unique
+  area   String
+  proyectos areasxproyecto[]
+}
+
+model areasxproyecto {
+  idproyecto Int
+  idarea     Int
+
+  proyecto   proyectos @relation(fields: [idproyecto], references: [id])
+  area       areas      @relation(fields: [idarea], references: [id])
+
+  // Definir la clave primaria compuesta
+  @@id([idproyecto, idarea])
+}
+
+model equipoxproyecto {
+  id_proyecto Int
+  id_personal Int
+  coordinador Boolean?
+  ConsultorAsociado Boolean?
+  Investigador Boolean?
+  SubCoordinador Boolean?
+
+  proyecto   proyectos @relation(fields: [id_proyecto], references: [id])
+  personal   personal  @relation(fields: [id_personal], references: [id])
+
+  @@id([id_proyecto, id_personal])
+}

@@ -1,12 +1,34 @@
-import * as React from "react";
+"use client";
+import { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
 import { Button } from "@mui/material";
+import { getDataForCards } from "@/actions/getDataFromDB";
+import { ListCardsStruct } from "@/utils/interfaces/interface";
+import { getMonthByNumber } from "@/utils/methods/serviceUtils";
+
+type ListCardstype = ListCardsStruct[] | null;
 
 export default function ListCards() {
+  const [listCards, setListCards] = useState<ListCardstype>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getDataForCards();
+      setListCards(data);
+    };
+    fetchData();
+  }, []);
+
+  const getPersonalList = (card: ListCardsStruct) => {
+    return card?.personal.map((p, index) => (
+      <span key={index}>{p.personal.nombre.replace(",", "")}{index === card.personal.length - 1 ? '' : ', '}</span>
+    ));
+  };
+
   return (
     <div
       style={{
@@ -14,79 +36,57 @@ export default function ListCards() {
         justifyContent: "center",
         flexDirection: "row",
         gap: "1rem",
+        height: "20rem",
       }}
     >
-      <Card
-        sx={{
-          width: 350,
-        }}
-      >
-        <CardContent
+      {listCards?.map((card, index) => (
+        <Card
+          key={index}
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            height: "85%",
+            width: 350,
           }}
         >
-          <Typography variant="body2" sx={{ color: "text.primary" }}>
-            Documento "fecha"
-          </Typography>
-          <Typography
-            variant="body2"
-            sx={{ color: "text.secondary", mt: "-7rem" }}
-          >
-            Titulo del proyecto
-          </Typography>
-          <div
-            style={{
+          <CardContent
+            sx={{
               display: "flex",
+              flexDirection: "column",
               justifyContent: "space-between",
-              alignItems: "center"
+              height: "85%",
             }}
+            key={index}
           >
+            <Typography variant="body2" sx={{ color: "text.primary" }}>
+              <span>
+                {" "}
+                {getMonthByNumber(card.mes_inicio || -1)?.mes} {card.anio_inicio}
+              </span>
+            </Typography>
             <Typography
               variant="body2"
-              sx={{ color: "text.secondary", mt: "auto" }}
+              sx={{ color: "text.secondary", mt: "-7rem" }}
             >
-              Autores
+              {card.titulo}
             </Typography>
-            <Button>
-              <AddIcon />
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-      <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
-          component="img"
-          height="194"
-          image="/static/images/cards/paella.jpg"
-          alt="Paella dish"
-        />
-        <CardContent>
-          <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            This impressive paella is a perfect party dish and a fun meal to
-            cook together with your guests. Add 1 cup of frozen peas along with
-            the mussels, if you like.
-          </Typography>
-        </CardContent>
-      </Card>
-      <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
-          component="img"
-          height="194"
-          image="/static/images/cards/paella.jpg"
-          alt="Paella dish"
-        />
-        <CardContent>
-          <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            This impressive paella is a perfect party dish and a fun meal to
-            cook together with your guests. Add 1 cup of frozen peas along with
-            the mussels, if you like.
-          </Typography>
-        </CardContent>
-      </Card>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mt: "auto" }}
+              >
+                {getPersonalList(card)}
+              </Typography>
+              <Button>
+                <AddIcon />
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      ))}
     </div>
   );
 }
