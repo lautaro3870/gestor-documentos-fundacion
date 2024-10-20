@@ -24,6 +24,7 @@ model proyectos {
   id       Int          @unique
   titulo   String?
   activo   Boolean?
+  pais_region String    @map("pais-region")
   mes_inicio Int?
   anio_inicio Int?
   departamento String?
@@ -40,6 +41,7 @@ model proyectos {
 model areas {
   id     Int    @unique
   area   String
+  activo Boolean?
   proyectos areasxproyecto[]
 }
 

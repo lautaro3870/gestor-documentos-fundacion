@@ -17,3 +17,14 @@ const months = [
 export const getMonthByNumber = (monthNumber: number) => {
   return months.find((month) => month.id === monthNumber);
 };
+
+export const generateArrayOfYears = (): number[] => {
+  const max = new Date().getFullYear();
+  const min = max - 70;
+  const years = [];
+
+  for (let i = max; i >= min; i--) {
+    years.push(i);
+  }
+  return years;
+};
