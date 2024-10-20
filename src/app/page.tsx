@@ -6,7 +6,9 @@ export default function MainPage() {
   return (
     <main>
       <div className={styles.div1}>
-        <ListCards />
+        <div style={{ width: "70rem" }}>
+          <ListCards />
+        </div>
       </div>
       <div className={styles.div2}>
         <Filter />

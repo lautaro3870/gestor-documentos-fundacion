@@ -1,15 +1,15 @@
 export interface ListCardsStruct {
   id: number;
-  titulo: string;
-  activo: boolean;
-  mes_inicio: number;
-  anio_inicio: number;
-  departamento: string;
-  pdf: string;
-  mes_finalizacion: number;
-  anio_finalizacion: number;
-  descripcion: string;
-  cita: string;
+  titulo: string | null;
+  activo: boolean | null;
+  mes_inicio: number | null;
+  anio_inicio: number | null;
+  departamento: string | null;
+  pdf: string | null;
+  mes_finalizacion: number | null;
+  anio_finalizacion: number | null;
+  descripcion: string | null;
+  cita: string | null;
   areas: AreaxProyecto[];
   personal: PersonalxProyecto[];
 }
