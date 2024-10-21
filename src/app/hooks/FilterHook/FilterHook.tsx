@@ -60,16 +60,6 @@ export default function FilterHook() {
     });
   };
 
-  const handleDelete = (value: number, filterType: keyof FilterProp) => {
-    setFilter((prevFilter: any) => {
-      const selectedItems = prevFilter[filterType];
-      return {
-        ...prevFilter,
-        [filterType]: selectedItems.filter((item: any) => item !== value),
-      };
-    });
-  };
-
   const submitFilter = async (e: any) => {
     e.preventDefault();
     const data = await getProjectsFiltered(
@@ -114,7 +104,6 @@ export default function FilterHook() {
     setFilter,
     handleChangeFilter,
     submitFilter,
-    handleDelete,
     handleCleanFilters,
     listYears
   };

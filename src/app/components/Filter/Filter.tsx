@@ -3,7 +3,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { Button, Grid2 } from "@mui/material";
+import { Button, Checkbox, Grid2, ListItemText } from "@mui/material";
 import styles from "./filter.module.css";
 import Box from "@mui/material/Box";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -22,7 +22,6 @@ export default function Filter() {
     filter,
     handleChangeFilter,
     submitFilter,
-    handleDelete,
     handleCleanFilters,
   } = FilterHook();
 
@@ -42,36 +41,23 @@ export default function Filter() {
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Areas</InputLabel>
             <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
+              labelId="demo-multiple-checkbox-label"
+              id="demo-multiple-checkbox"
               value={filter.area}
               label="Areas"
               onChange={(e) => handleChangeFilter(e, "area")}
-              input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
-              renderValue={(selected: any) => (
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                  {selected.map((value: any) => (
-                    <Chip
-                      key={value}
-                      label={
-                        areas.find((area) => area.id === value)?.area || value
-                      }
-                      onDelete={() => handleDelete(value, "area")}
-                      deleteIcon={
-                        <CancelIcon
-                          onMouseDown={(event) => event.stopPropagation()}
-                        />
-                      }
-                    />
-                  ))}
-                </Box>
-              )}
+              input={<OutlinedInput id="select-multiple-chip" label="Area" />}
+              renderValue={(selected) => selected.map(id => {
+                const areaObj = areas.find(area => area.id === id);
+                return areaObj ? areaObj.area : '';
+              }).join(', ')}
               MenuProps={MenuProps}
             >
               <MenuItem value="">Area</MenuItem>
               {areas.map((area: any, i: number) => (
                 <MenuItem key={i} value={area.id}>
-                  {area.area}
+                  <Checkbox checked={filter.area.indexOf(area.id) > -1} />
+                  <ListItemText primary={area.area}/>
                 </MenuItem>
               ))}
             </Select>
@@ -103,36 +89,23 @@ export default function Filter() {
               value={filter.personal}
               label="Autores"
               onChange={(e) => handleChangeFilter(e, "personal")}
-              renderValue={(selected: any) => (
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                  {selected.map((value: any) => (
-                    <Chip
-                      key={value}
-                      label={
-                        personal.find((p) => p.id === value)?.nombre || value
-                      }
-                      onDelete={() => handleDelete(value, "personal")}
-                      deleteIcon={
-                        <CancelIcon
-                          onMouseDown={(event) => event.stopPropagation()}
-                        />
-                      }
-                    />
-                  ))}
-                </Box>
-              )}
+              renderValue={(selected) => selected.map(id => {
+                const personalObj = personal.find(p => p.id === id);
+                return personalObj ? personalObj.nombre : '';
+              }).join(', ')}
               MenuProps={MenuProps}
             >
               <MenuItem value="">Autores</MenuItem>
               {personal.map((p: Personal, i: number) => (
                 <MenuItem key={i} value={p.id}>
-                  {p.nombre}
+                  <Checkbox checked={filter.personal.indexOf(p.id) > -1} />
+                  <ListItemText primary={p.nombre}/>
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
         </Grid>
-        <Grid size={2}>
+        <Grid size={1}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Año</InputLabel>
             <Select
@@ -141,28 +114,14 @@ export default function Filter() {
               value={filter.anio}
               label="Año"
               onChange={(e) => handleChangeFilter(e, "anio")}
-              renderValue={(selected: any) => (
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                  {selected.map((value: any) => (
-                    <Chip
-                      key={value}
-                      label={listYears.find((p) => p === value) || value}
-                      onDelete={() => handleDelete(value, "anio")}
-                      deleteIcon={
-                        <CancelIcon
-                          onMouseDown={(event) => event.stopPropagation()}
-                        />
-                      }
-                    />
-                  ))}
-                </Box>
-              )}
+              renderValue={(selected) => selected.join(', ')}
               MenuProps={MenuProps}
             >
               <MenuItem value={0}>Año</MenuItem>
               {listYears.map((year: number, index: number) => (
                 <MenuItem key={index} value={year}>
-                  {year}
+                  <Checkbox checked={filter.anio.indexOf(year) > -1} />
+                  <ListItemText primary={year}/>
                 </MenuItem>
               ))}
             </Select>
