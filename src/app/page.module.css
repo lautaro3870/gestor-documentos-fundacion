@@ -12,3 +12,9 @@
   justify-items: center;
   justify-content: center;
 }
+
+.projects {
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+}

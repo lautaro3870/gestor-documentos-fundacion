@@ -18,7 +18,7 @@ export default function ListCards() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getDataForCards();
+      const data = await getDataForCards(0, 3);
       setListCards(data);
     };
     fetchData();
@@ -49,9 +49,9 @@ export default function ListCards() {
                 </Typography>
                 <Typography
                   variant="body2"
-                  sx={{ color: "text.primary", height: "13rem" }}
+                  sx={{ color: "text.primary", height: "13rem", fontSize: "1.3rem" }}
                 >
-                  <h2>{card.titulo}</h2>
+                  {card.titulo}
                 </Typography>
 
                 <Grid container spacing={2} sx={{marginTop: "-1rem"}}>
@@ -75,100 +75,5 @@ export default function ListCards() {
         ))}
       </Grid>
     </Box>
-
-    // <Box sx={{ flexGrow: 2 }}>
-    //   <Grid container spacing={2}>
-    //     {listCards?.map((card, index) => (
-    //       <Grid size={4}>
-    //         <Card key={index} sx={{ height: "20rem" }}>
-    //           <CardContent key={index}>
-    //             <Typography variant="body2" sx={{ color: "text.primary" }}>
-    //               <span>
-    //                 {" "}
-    //                 {getMonthByNumber(card.mes_inicio || -1)?.mes}{" "}
-    //                 {card.anio_inicio}
-    //               </span>
-    //             </Typography>
-    //             <Typography
-    //               variant="body2"
-    //               sx={{ color: "text.secondary", mt: "-7rem" }}
-    //             >
-    //               {card.titulo}
-    //             </Typography>
-    //             <Typography
-    //               variant="body2"
-    //               sx={{ color: "text.secondary", mt: "auto" }}
-    //             >
-    //               {getPersonalList(card)}
-    //             </Typography>
-    //             <Button>
-    //               <AddIcon />
-    //             </Button>
-    //             <div></div>
-    //           </CardContent>
-    //         </Card>
-    //       </Grid>
-    //     ))}
-    //   </Grid>
-    // </Box>
-
-    // <div
-    //   style={{
-    //     display: "flex",
-    //     justifyContent: "center",
-    //     flexDirection: "row",
-    //     gap: "1rem",
-    //     height: "20rem",
-    //   }}
-    // >
-    //   {listCards?.map((card, index) => (
-    //     <Card
-    //       key={index}
-    //       sx={{
-    //         width: 350,
-    //       }}
-    //     >
-    //       <CardContent
-    //         sx={{
-    //           display: "flex",
-    //           flexDirection: "column",
-    //           justifyContent: "space-between",
-    //           height: "85%",
-    //         }}
-    //         key={index}
-    //       >
-    //         <Typography variant="body2" sx={{ color: "text.primary" }}>
-    //           <span>
-    //             {" "}
-    //             {getMonthByNumber(card.mes_inicio || -1)?.mes} {card.anio_inicio}
-    //           </span>
-    //         </Typography>
-    //         <Typography
-    //           variant="body2"
-    //           sx={{ color: "text.secondary", mt: "-7rem" }}
-    //         >
-    //           {card.titulo}
-    //         </Typography>
-    //         <div
-    //           style={{
-    //             display: "flex",
-    //             justifyContent: "space-between",
-    //             alignItems: "center",
-    //           }}
-    //         >
-    //           <Typography
-    //             variant="body2"
-    //             sx={{ color: "text.secondary", mt: "auto" }}
-    //           >
-    //             {getPersonalList(card)}
-    //           </Typography>
-    //           <Button>
-    //             <AddIcon />
-    //           </Button>
-    //         </div>
-    //       </CardContent>
-    //     </Card>
-    //   ))}
-    // </div>
   );
 }

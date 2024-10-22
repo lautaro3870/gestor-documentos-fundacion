@@ -1,7 +1,7 @@
 "use server";
 import { prisma } from "../lib/prisma";
 
-export const getDataForCards = async () => {
+export const getDataForCards = async (page: number, takeValue: number) => {
   const data = await prisma.proyectos.findMany({
     where: {
       activo: true,
@@ -21,7 +21,8 @@ export const getDataForCards = async () => {
         },
       },
     },
-    take: 3,
+    take: takeValue,
+    skip: page !== 0 ? (page - 1) * 5 : 0,
   });
   return data;
 };
