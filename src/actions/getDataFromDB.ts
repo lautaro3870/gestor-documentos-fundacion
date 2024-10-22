@@ -53,7 +53,9 @@ export const getProjectsFiltered = async (
   areasId: number[],
   depto: string,
   personalId: number[],
-  anio: number[]
+  anio: number[],
+  takeValue: number,
+  page: number
 ) => {
   return await prisma.proyectos.findMany({
     include: {
@@ -102,5 +104,10 @@ export const getProjectsFiltered = async (
           : {},
       ],
     },
+    orderBy: {
+      id: "desc",
+    },
+    take: takeValue,
+    skip: page !== 0 ? (page - 1) * 5 : 0,
   });
 };

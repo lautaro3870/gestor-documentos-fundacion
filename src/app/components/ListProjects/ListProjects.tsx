@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -8,9 +8,10 @@ import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
 import { ListCardsStruct } from "@/utils/interfaces/interface";
 import { getDataForCards } from "@/actions/getDataFromDB";
+import { useAppContext } from "@/context";
 
 export default function MediaCard() {
-  const [projects, setProjects] = useState<ListCardsStruct[]>([]);
+  const { projects, setProjects} = useAppContext();
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -51,6 +52,9 @@ export default function MediaCard() {
           <CardContent sx={{
             width: "40rem"
           }}>
+            <Typography gutterBottom sx={{fontSize: "1rem"}} component="div">
+              {project.departamento} - {project.anio_inicio}
+            </Typography>
             <Typography gutterBottom variant="h5" component="div">
               {project.titulo}
             </Typography>

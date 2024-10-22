@@ -1,5 +1,6 @@
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { StyledRoot } from "./StyledRoot";
+import { AppWrapper } from "@/context";
 
 export default function RootLayout({
   children,
@@ -9,9 +10,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AppRouterCacheProvider>
-          <StyledRoot>{children}</StyledRoot>
-        </AppRouterCacheProvider>
+        <AppWrapper>
+          <AppRouterCacheProvider>
+            <StyledRoot>{children}</StyledRoot>
+          </AppRouterCacheProvider>
+        </AppWrapper>
       </body>
     </html>
   );

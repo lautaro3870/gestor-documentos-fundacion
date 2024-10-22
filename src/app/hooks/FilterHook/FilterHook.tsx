@@ -9,8 +9,12 @@ import {
 } from "@/actions/getDataFromDB";
 import { Area, FilterProp, Personal } from "@/utils/interfaces/interface";
 import { generateArrayOfYears } from "@/utils/methods/serviceUtils";
+import { useAppContext } from "@/context";
 
 export default function FilterHook() {
+
+  const { projects, setProjects} = useAppContext();
+
   const [areas, setAreas] = useState<Area>([]);
   const [personal, setPersonal] = useState<Personal[]>([]);
   const listYears = generateArrayOfYears();
@@ -66,9 +70,11 @@ export default function FilterHook() {
       filter.area,
       filter.departamento,
       filter.personal,
-      filter.anio
+      filter.anio,
+      5,
+      5
     );
-    console.log(data)
+    setProjects(data);
   };
 
   useEffect(() => {
@@ -92,7 +98,8 @@ export default function FilterHook() {
       personal: [],
       anio: []
     });
-    const data = await getProjectsFiltered([], "", [], []);
+    const data = await getProjectsFiltered([], "", [], [], 5, 5);
+    setProjects(data);
   };
 
   return {
