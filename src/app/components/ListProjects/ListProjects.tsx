@@ -1,5 +1,3 @@
-"use client";
-import { useState, useEffect, useContext } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -7,7 +5,6 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
 import { ListCardsStruct } from "@/utils/interfaces/interface";
-import { getDataForCards } from "@/actions/getDataFromDB";
 import { useAppContext } from "@/context";
 
 export default function ListProjects() {

@@ -1,13 +1,8 @@
-"use client";
-
 import { SelectChangeEvent } from "@mui/material";
-import { useEffect, useState } from "react";
 import {
-  getAreas,
-  getPersonal,
   getProjectsFiltered,
 } from "@/actions/getDataFromDB";
-import { Area, FilterProp, Personal } from "@/utils/interfaces/interface";
+import { FilterProp } from "@/utils/interfaces/interface";
 import { generateArrayOfYears } from "@/utils/methods/serviceUtils";
 import { useAppContext } from "@/context";
 

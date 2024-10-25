@@ -1,12 +1,8 @@
-"use client";
-import { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
 import { Box, Button } from "@mui/material";
-import { getDataForCards } from "@/actions/getDataFromDB";
 import { ListCardsStruct } from "@/utils/interfaces/interface";
 import { getMonthByNumber } from "@/utils/methods/serviceUtils";
 import Grid from "@mui/material/Grid2";
