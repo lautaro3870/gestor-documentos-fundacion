@@ -8,7 +8,7 @@ import FilterHook from "@/app/hooks/FilterHook/FilterHook";
 
 export default function Paginator() {
   const { paginator, setPaginator, setPage, page } = useAppContext();
-  const { submitFilter, make } = FilterHook();
+  const { make } = FilterHook();
 
   React.useEffect(() => {
     const fetchData = async() => {

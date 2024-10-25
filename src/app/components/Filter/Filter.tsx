@@ -3,7 +3,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { Button, Checkbox, Grid2, ListItemText } from "@mui/material";
+import { Button, Checkbox, ListItemText } from "@mui/material";
 import Box from "@mui/material/Box";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import FilterHook from "@/app/hooks/FilterHook/FilterHook";
