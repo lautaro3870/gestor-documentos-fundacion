@@ -57,7 +57,9 @@ export const getProjectsFiltered = async (
   takeValue: number,
   page: number
 ) => {
-  return await prisma.proyectos.findMany({
+  const projects = await prisma.proyectos.findMany({
+    take: takeValue,
+    skip: (page - 1) * takeValue,
     include: {
       areas: {
         include: {
@@ -107,7 +109,58 @@ export const getProjectsFiltered = async (
     orderBy: {
       id: "desc",
     },
-    take: takeValue,
-    skip: page !== 0 ? (page - 1) * 5 : 0,
+  });
+  const projectsCount = await getProjectCount(areasId, depto, personalId, anio);
+  return {
+    projects,
+    projectsCount,
+  };
+};
+
+export const getProjectCount = async (
+  areasId: number[],
+  depto: string,
+  personalId: number[],
+  anio: number[]
+) => {
+  return await prisma.proyectos.count({
+    where: {
+      departamento: depto ? depto : undefined,
+      anio_inicio:
+        anio.length !== 0
+          ? {
+              in: anio,
+            }
+          : {},
+      activo: true,
+      AND: [
+        areasId.length !== 0
+          ? {
+              areas: {
+                some: {
+                  idarea: {
+                    in: areasId,
+                  },
+                },
+              },
+            }
+          : {},
+        personalId.length !== 0
+          ? {
+              personal: {
+                some: {
+                  id_personal: {
+                    in: personalId,
+                  },
+                },
+              },
+            }
+          : {},
+      ],
+    },
   });
 };
+
+export const getTotalProjectsCount = async() => {
+  return await prisma.proyectos.count();
+}

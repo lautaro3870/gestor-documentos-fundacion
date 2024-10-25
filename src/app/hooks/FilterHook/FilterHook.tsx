@@ -12,19 +12,12 @@ import { generateArrayOfYears } from "@/utils/methods/serviceUtils";
 import { useAppContext } from "@/context";
 
 export default function FilterHook() {
-
-  const { projects, setProjects} = useAppContext();
+  const { setPaginator, setProjects, page, filters, setFilters, setPage } =
+    useAppContext();
 
   const [areas, setAreas] = useState<Area>([]);
   const [personal, setPersonal] = useState<Personal[]>([]);
   const listYears = generateArrayOfYears();
-
-  const [filter, setFilter] = useState<FilterProp>({
-    area: [],
-    departamento: "",
-    personal: [],
-    anio: [],
-  });
 
   const handleChangeFilter = (
     event: SelectChangeEvent<number[] | string | number>,
@@ -32,8 +25,12 @@ export default function FilterHook() {
   ) => {
     const { value } = event.target;
 
-    setFilter((prevFilter: any) => {
-      if (filterType === "area" || filterType === "personal" || filterType === "anio") {
+    setFilters((prevFilter: any) => {
+      if (
+        filterType === "area" ||
+        filterType === "personal" ||
+        filterType === "anio"
+      ) {
         if (value !== "") {
           const selectedItems = prevFilter[filterType];
           if (selectedItems.includes(value)) {
@@ -66,15 +63,20 @@ export default function FilterHook() {
 
   const submitFilter = async (e: any) => {
     e.preventDefault();
-    const data = await getProjectsFiltered(
-      filter.area,
-      filter.departamento,
-      filter.personal,
-      filter.anio,
+    await make();
+  };
+
+  const make = async () => {
+    const { projects, projectsCount } = await getProjectsFiltered(
+      filters.area,
+      filters.departamento,
+      filters.personal,
+      filters.anio,
       5,
-      5
+      page
     );
-    setProjects(data);
+    setProjects(projects);
+    setPaginator(projectsCount);
   };
 
   useEffect(() => {
@@ -92,14 +94,16 @@ export default function FilterHook() {
 
   const handleCleanFilters = async (e: any) => {
     e.preventDefault();
-    setFilter({
+    setFilters({
       area: [],
       departamento: "",
       personal: [],
-      anio: []
+      anio: [],
     });
-    const data = await getProjectsFiltered([], "", [], [], 5, 5);
-    setProjects(data);
+    const { projects, projectsCount } = await getProjectsFiltered([], "", [], [], 5, 5);
+    setProjects(projects);
+    setPage(1);
+    setPaginator(projectsCount);
   };
 
   return {
@@ -107,11 +111,12 @@ export default function FilterHook() {
     setAreas,
     personal,
     setPersonal,
-    filter,
-    setFilter,
+    filters,
+    setFilters,
     handleChangeFilter,
     submitFilter,
     handleCleanFilters,
-    listYears
+    listYears,
+    make
   };
 }

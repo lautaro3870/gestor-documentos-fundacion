@@ -4,11 +4,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Button, Checkbox, Grid2, ListItemText } from "@mui/material";
-import styles from "./filter.module.css";
 import Box from "@mui/material/Box";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import Chip from "@mui/material/Chip";
-import CancelIcon from "@mui/icons-material/Cancel";
 import FilterHook from "@/app/hooks/FilterHook/FilterHook";
 import { Personal } from "@/utils/interfaces/interface";
 import { MenuProps } from "@/utils/constants";
@@ -19,7 +16,7 @@ export default function Filter() {
     areas,
     personal,
     listYears,
-    filter,
+    filters,
     handleChangeFilter,
     submitFilter,
     handleCleanFilters,
@@ -43,7 +40,7 @@ export default function Filter() {
             <Select
               labelId="demo-multiple-checkbox-label"
               id="demo-multiple-checkbox"
-              value={filter.area}
+              value={filters.area}
               label="Areas"
               onChange={(e) => handleChangeFilter(e, "area")}
               input={<OutlinedInput id="select-multiple-chip" label="Area" />}
@@ -56,7 +53,7 @@ export default function Filter() {
               <MenuItem value="">Area</MenuItem>
               {areas.map((area: any, i: number) => (
                 <MenuItem key={i} value={area.id}>
-                  <Checkbox checked={filter.area.indexOf(area.id) > -1} />
+                  <Checkbox checked={filters.area.indexOf(area.id) > -1} />
                   <ListItemText primary={area.area}/>
                 </MenuItem>
               ))}
@@ -69,7 +66,7 @@ export default function Filter() {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={filter.departamento}
+              value={filters.departamento}
               label="Departamentos"
               onChange={(e) => handleChangeFilter(e, "departamento")}
             >
@@ -86,7 +83,7 @@ export default function Filter() {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={filter.personal}
+              value={filters.personal}
               label="Autores"
               onChange={(e) => handleChangeFilter(e, "personal")}
               renderValue={(selected) => selected.map(id => {
@@ -98,7 +95,7 @@ export default function Filter() {
               <MenuItem value="">Autores</MenuItem>
               {personal.map((p: Personal, i: number) => (
                 <MenuItem key={i} value={p.id}>
-                  <Checkbox checked={filter.personal.indexOf(p.id) > -1} />
+                  <Checkbox checked={filters.personal.indexOf(p.id) > -1} />
                   <ListItemText primary={p.nombre}/>
                 </MenuItem>
               ))}
@@ -111,7 +108,7 @@ export default function Filter() {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={filter.anio}
+              value={filters.anio}
               label="Año"
               onChange={(e) => handleChangeFilter(e, "anio")}
               renderValue={(selected) => selected.join(', ')}
@@ -120,7 +117,7 @@ export default function Filter() {
               <MenuItem value={0}>Año</MenuItem>
               {listYears.map((year: number, index: number) => (
                 <MenuItem key={index} value={year}>
-                  <Checkbox checked={filter.anio.indexOf(year) > -1} />
+                  <Checkbox checked={filters.anio.indexOf(year) > -1} />
                   <ListItemText primary={year}/>
                 </MenuItem>
               ))}
