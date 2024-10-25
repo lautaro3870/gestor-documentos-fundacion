@@ -32,16 +32,16 @@ const AppContext = createContext<{
 });
 
 export function AppWrapper({ children }: { children: React.ReactNode }) {
-  let [projects, setProjects] = useState<ListCardsStruct[]>([]);
-  let [paginator, setPaginator] = useState<number>(0);
-  let [page, setPage] = useState<number>(1);
-  let [filters, setFilters] = useState<FilterProp>({
+  const [projects, setProjects] = useState<ListCardsStruct[]>([]);
+  const [paginator, setPaginator] = useState<number>(0);
+  const [page, setPage] = useState<number>(1);
+  const [filters, setFilters] = useState<FilterProp>({
     anio: [],
     area: [],
     departamento: "",
     personal: [],
   });
-  let [dataLoaded, setDataLoaded] = useState<boolean>(false);
+  const [dataLoaded, setDataLoaded] = useState<boolean>(false);
 
   return (
     <AppContext.Provider
