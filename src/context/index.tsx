@@ -11,6 +11,8 @@ const AppContext = createContext<{
   setPage: React.Dispatch<React.SetStateAction<number>>;
   filters: FilterProp;
   setFilters: React.Dispatch<React.SetStateAction<FilterProp>>;
+  dataLoaded: boolean;
+  setDataLoaded: React.Dispatch<React.SetStateAction<boolean>>;
 }>({
   projects: [],
   setProjects: () => {},
@@ -25,6 +27,8 @@ const AppContext = createContext<{
     personal: [],
   },
   setFilters: () => {},
+  dataLoaded: false,
+  setDataLoaded: () => {}
 });
 
 export function AppWrapper({ children }: { children: React.ReactNode }) {
@@ -37,6 +41,7 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
     departamento: "",
     personal: [],
   });
+  let [dataLoaded, setDataLoaded] = useState<boolean>(false);
 
   return (
     <AppContext.Provider
@@ -49,6 +54,8 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
         setPage,
         filters,
         setFilters,
+        dataLoaded,
+        setDataLoaded
       }}
     >
       {children}

@@ -36,7 +36,7 @@ export interface PersonalxProyecto {
 export type Area = {
   id: number;
   area: string;
-}[];
+};
 
 export type Personal = {
   id: number;

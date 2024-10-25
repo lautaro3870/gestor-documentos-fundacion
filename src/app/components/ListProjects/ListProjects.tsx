@@ -10,16 +10,8 @@ import { ListCardsStruct } from "@/utils/interfaces/interface";
 import { getDataForCards } from "@/actions/getDataFromDB";
 import { useAppContext } from "@/context";
 
-export default function MediaCard() {
-  const { projects, setProjects} = useAppContext();
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      const data = await getDataForCards(5, 5);
-      setProjects(data);
-    };
-    fetchProjects();
-  }, []);
+export default function ListProjects() {
+  const { projects } = useAppContext();
 
   const getPersonalList = (card: ListCardsStruct) => {
     return card?.personal.map((p, index) => (
@@ -36,11 +28,16 @@ export default function MediaCard() {
         <Card
           sx={{
             maxWidth: 900,
-            marginTop: "1rem",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
             height: "12rem",
+            width: {
+              lg: "100%",
+              md: "80%",
+              xs: "60%",
+            },
+            margin: "auto",
           }}
           key={index}
         >
@@ -49,10 +46,12 @@ export default function MediaCard() {
             sx={{ height: 100, width: 200, objectFit: "contain" }}
             image="https://fundacionbariloche.org.ar/wp-content/uploads/2024/07/pdf.png"
           />
-          <CardContent sx={{
-            width: "40rem"
-          }}>
-            <Typography gutterBottom sx={{fontSize: "1rem"}} component="div">
+          <CardContent
+            sx={{
+              width: "40rem",
+            }}
+          >
+            <Typography gutterBottom sx={{ fontSize: "1rem" }} component="div">
               {project.departamento} - {project.anio_inicio}
             </Typography>
             <Typography gutterBottom variant="h5" component="div">

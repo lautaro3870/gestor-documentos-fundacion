@@ -15,8 +15,6 @@ export default function FilterHook() {
   const { setPaginator, setProjects, page, filters, setFilters, setPage } =
     useAppContext();
 
-  const [areas, setAreas] = useState<Area>([]);
-  const [personal, setPersonal] = useState<Personal[]>([]);
   const listYears = generateArrayOfYears();
 
   const handleChangeFilter = (
@@ -79,19 +77,6 @@ export default function FilterHook() {
     setPaginator(projectsCount);
   };
 
-  useEffect(() => {
-    const fetchAreas = async () => {
-      const data = await getAreas();
-      setAreas(data);
-    };
-    const fetchPersonal = async () => {
-      const personal = await getPersonal();
-      setPersonal(personal);
-    };
-    fetchAreas();
-    fetchPersonal();
-  }, []);
-
   const handleCleanFilters = async (e: any) => {
     e.preventDefault();
     setFilters({
@@ -107,10 +92,6 @@ export default function FilterHook() {
   };
 
   return {
-    areas,
-    setAreas,
-    personal,
-    setPersonal,
     filters,
     setFilters,
     handleChangeFilter,

@@ -11,19 +11,11 @@ import { ListCardsStruct } from "@/utils/interfaces/interface";
 import { getMonthByNumber } from "@/utils/methods/serviceUtils";
 import Grid from "@mui/material/Grid2";
 
-type ListCardstype = ListCardsStruct[] | null;
+type ListCardsProps = {
+  listCards: ListCardsStruct[];
+};
 
-export default function ListCards() {
-  const [listCards, setListCards] = useState<ListCardstype>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getDataForCards(0, 3);
-      setListCards(data);
-    };
-    fetchData();
-  }, []);
-
+export default function ListCards({ listCards }: ListCardsProps) {
   const getPersonalList = (card: ListCardsStruct) => {
     return card?.personal.map((p, index) => (
       <span key={index}>
@@ -39,7 +31,7 @@ export default function ListCards() {
         {listCards?.map((card, index) => (
           <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
             <Card key={index} sx={{ height: "20rem" }}>
-              <CardContent key={index} >
+              <CardContent key={index}>
                 <Typography variant="body2" sx={{ color: "text.primary" }}>
                   <span>
                     {" "}
@@ -49,12 +41,16 @@ export default function ListCards() {
                 </Typography>
                 <Typography
                   variant="body2"
-                  sx={{ color: "text.primary", height: "13rem", fontSize: "1.3rem" }}
+                  sx={{
+                    color: "text.primary",
+                    height: "13rem",
+                    fontSize: "1.3rem",
+                  }}
                 >
                   {card.titulo}
                 </Typography>
 
-                <Grid container spacing={2} sx={{marginTop: "-1rem"}}>
+                <Grid container spacing={2} sx={{ marginTop: "-1rem" }}>
                   <Grid size={9}>
                     <Typography
                       variant="body2"
