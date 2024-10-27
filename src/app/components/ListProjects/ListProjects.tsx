@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
 import { ListCardsStruct } from "@/utils/interfaces/interface";
 import { useAppContext } from "@/context";
+import Link from "next/link";
 
 export default function ListProjects() {
   const { projects } = useAppContext();
@@ -63,9 +64,11 @@ export default function ListProjects() {
               marginRight: "1rem",
             }}
           >
-            <Button>
-              <AddIcon />
-            </Button>
+            <Link href={`/project/${project.id}`}>
+              <Button>
+                <AddIcon />
+              </Button>
+            </Link>
           </div>
         </Card>
       ))}

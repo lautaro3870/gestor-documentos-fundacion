@@ -161,6 +161,26 @@ export const getProjectCount = async (
   });
 };
 
-export const getTotalProjectsCount = async() => {
+export const getTotalProjectsCount = async () => {
   return await prisma.proyectos.count();
-}
+};
+
+export const getProjectById = async (id: number) => {
+  return await prisma.proyectos.findUnique({
+    include: {
+      areas: {
+        include: {
+          area: true,
+        },
+      },
+      personal: {
+        include: {
+          personal: true,
+        },
+      },
+    },
+    where: {
+      id,
+    },
+  });
+};
