@@ -33,3 +33,18 @@
   align-items: center;
   height: 100vh;
 }
+
+.projectContainer {
+  gap: 2rem;
+  padding: 2rem;
+  min-height: 10rem;
+  height: 20rem;
+  background-color: #F5F5F5;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin-top: 15rem;
+}

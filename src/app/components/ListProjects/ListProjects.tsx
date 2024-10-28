@@ -24,6 +24,7 @@ export default function ListProjects() {
     <div>
       {projects.map((project: ListCardsStruct, index: number) => (
         <Card
+          variant="outlined"
           sx={{
             maxWidth: 900,
             display: "flex",
