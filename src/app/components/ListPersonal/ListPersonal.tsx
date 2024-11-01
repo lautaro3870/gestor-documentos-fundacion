@@ -15,11 +15,44 @@ type ListPersonalProps = {
 };
 
 export default function ListPersonal({ personal }: ListPersonalProps) {
+  const typeOfCharge: Array<keyof PersonalxProyecto> = [
+    "coordinador",
+    "ConsultorAsociado",
+    "Investigador",
+    "SubCoordinador",
+  ];
+  const typeOfChargeObject: { [key in keyof PersonalxProyecto]?: string } = {
+    coordinador: "Coordinador",
+    ConsultorAsociado: "Consultor Asociado",
+    Investigador: "Investigador",
+    SubCoordinador: "Subcoordinador",
+  };
+
   const [value, setValue] = useState<number | undefined>(3);
   const [isOpen, setIsOpen] = useState(false);
+
+  const getChargeOfPersonal = (autor: PersonalxProyecto): any[] => {
+    const result: any = [];
+    typeOfCharge.forEach((charge) => {
+      if (autor[charge]) {
+        result.push(typeOfChargeObject[charge]);
+      }
+    });
+    return result;
+  };
+
   return (
-    <div className={styles.cardContainer}>
-      <Card sx={{ minWidth: 275 }} variant="elevation">
+    <Card sx={{
+      maxWidth: {
+        xl: "20rem"
+      }
+    }} className={styles.cardContainer}>
+      <Card
+        sx={{
+          minWidth: 275,
+        }}
+        variant="elevation"
+      >
         <CardContent
           sx={{
             display: "flex",
@@ -50,10 +83,19 @@ export default function ListPersonal({ personal }: ListPersonalProps) {
                 variant="h5"
                 sx={{
                   fontSize: 20,
+                  height: "auto"
                 }}
                 component="div"
               >
                 {autor.personal.nombre}
+              </Typography>
+              <Typography variant="h1" sx={{ fontSize: 15 }}>
+                {getChargeOfPersonal(autor).map((a) => (
+                  <div>
+                    <span key={a}>{a}</span>
+                    <br />
+                  </div>
+                ))}
               </Typography>
             </CardContent>
           </Card>
@@ -84,6 +126,6 @@ export default function ListPersonal({ personal }: ListPersonalProps) {
           <div></div>
         )}
       </Card>
-    </div>
+    </Card>
   );
 }

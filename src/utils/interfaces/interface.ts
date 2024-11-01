@@ -26,6 +26,10 @@ export interface AreaxProyecto {
 export interface PersonalxProyecto {
   id_proyecto: number;
   id_personal: number;
+  coordinador: boolean | null;
+  ConsultorAsociado: boolean | null;
+  Investigador: boolean | null;
+  SubCoordinador: boolean | null;
   personal: {
     id: number;
     nombre: string;

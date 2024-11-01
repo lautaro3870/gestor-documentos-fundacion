@@ -14,7 +14,7 @@ const months = [
   { id: -1, mes: "" },
 ];
 
-export const getMonthByNumber = (monthNumber: number) => {
+export const getMonthByNumber = (monthNumber: number | null) => {
   return months.find((month) => month.id === monthNumber);
 };
 

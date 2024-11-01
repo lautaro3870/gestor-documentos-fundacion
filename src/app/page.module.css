@@ -1,7 +1,7 @@
 .div1 {
   width: 100%;
   min-height: 25rem;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   justify-content: center;
   align-items: center;
   display: flex;
@@ -35,16 +35,13 @@
 }
 
 .projectContainer {
-  gap: 2rem;
-  padding: 2rem;
-  min-height: 10rem;
-  height: 20rem;
-  background-color: #F5F5F5;
+  background-color: #f0f0f0; /* Color de fondo */
+  padding: 2rem; /* Espaciado interno */
+  border-radius: 8px; /* Bordes redondeados, opcional */
 }
 
 .cardContainer {
   display: flex;
   flex-direction: column;
-  max-width: 300px;
   margin-top: 15rem;
 }
