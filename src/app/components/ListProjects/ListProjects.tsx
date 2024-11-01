@@ -26,15 +26,14 @@ export default function ListProjects() {
         <Card
           variant="outlined"
           sx={{
-            maxWidth: 900,
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            height: "12rem",
+            height: "16rem",
             width: {
-              lg: "100%",
+              lg: "80%",
               md: "80%",
-              xs: "60%",
+              xs: "80%",
             },
             margin: "auto",
           }}
@@ -42,21 +41,41 @@ export default function ListProjects() {
         >
           <CardMedia
             component="img"
-            sx={{ height: 100, width: 200, objectFit: "contain" }}
+            sx={{
+              height: 100,
+              width: 200,
+              objectFit: "contain",
+              display: {
+                xs: "none",
+                xl: "block",
+                lg: "block"
+              },
+            }}
             image="https://fundacionbariloche.org.ar/wp-content/uploads/2024/07/pdf.png"
           />
-          <CardContent
-            sx={{
-              width: "40rem",
-            }}
-          >
+          <CardContent>
             <Typography gutterBottom sx={{ fontSize: "1rem" }} component="div">
               {project.departamento} - {project.anio_inicio}
             </Typography>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="div"
+              fontSize={{
+                xs: "0.9rem",
+              }}
+            >
               {project.titulo}
             </Typography>
-            <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            <Typography
+              variant="body2"
+              sx={{
+                color: "text.secondary",
+                overflow: {
+                  xs: "auto",
+                },
+              }}
+            >
               {getPersonalList(project)}
             </Typography>
           </CardContent>

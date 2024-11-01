@@ -42,11 +42,14 @@ export default function ListPersonal({ personal }: ListPersonalProps) {
   };
 
   return (
-    <Card sx={{
-      maxWidth: {
-        xl: "20rem"
-      }
-    }} className={styles.cardContainer}>
+    <Card
+      sx={{
+        maxWidth: {
+          xl: "20rem",
+        },
+      }}
+      className={styles.cardContainer}
+    >
       <Card
         sx={{
           minWidth: 275,
@@ -74,16 +77,23 @@ export default function ListPersonal({ personal }: ListPersonalProps) {
             variant="outlined"
           >
             <CardMedia
-              sx={{ height: 100, width: 100, margin: 1 }}
-              image="https://green.excertia.com/wp-content/uploads/2020/04/perfil-empty.png"
+              sx={{
+                height: 100,
+                width: 100,
+                margin: 1,
+                borderRadius: "1rem",
+              }}
+              image="https://fundacionbariloche.org.ar/wp-content/uploads/2023/10/gonzalobravo.png"
               component="img"
             />
             <CardContent>
               <Typography
                 variant="h5"
+                key={i}
                 sx={{
                   fontSize: 20,
-                  height: "auto"
+                  height: "auto",
+                  width: "10rem",
                 }}
                 component="div"
               >
@@ -91,7 +101,7 @@ export default function ListPersonal({ personal }: ListPersonalProps) {
               </Typography>
               <Typography variant="h1" sx={{ fontSize: 15 }}>
                 {getChargeOfPersonal(autor).map((a) => (
-                  <div>
+                  <div key={a}>
                     <span key={a}>{a}</span>
                     <br />
                   </div>
