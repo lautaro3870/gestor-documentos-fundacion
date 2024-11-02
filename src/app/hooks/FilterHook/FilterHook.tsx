@@ -1,4 +1,3 @@
-import { SelectChangeEvent } from "@mui/material";
 import {
   getProjectsFiltered,
 } from "@/actions/getDataFromDB";
@@ -13,7 +12,7 @@ export default function FilterHook() {
   const listYears = generateArrayOfYears();
 
   const handleChangeFilter = (
-    event: SelectChangeEvent<number[] | string | number>,
+    event: { target: { value: number[] | string | number } },
     filterType: keyof FilterProp
   ) => {
     const { value } = event.target;
@@ -24,24 +23,31 @@ export default function FilterHook() {
         filterType === "personal" ||
         filterType === "anio"
       ) {
-        if (value !== "") {
-          const selectedItems = prevFilter[filterType];
-          if (selectedItems.includes(value)) {
-            return {
-              ...prevFilter,
-              [filterType]: selectedItems.filter((item: any) => item !== value),
-            };
+        if (Array.isArray(value)) {
+          return {
+            ...prevFilter,
+            [filterType]: value,
+          };
+        } else {
+          if (value !== "") {
+            const selectedItems = prevFilter[filterType];
+            if (selectedItems.includes(value)) {
+              return {
+                ...prevFilter,
+                [filterType]: selectedItems.filter((item: any) => item !== value),
+              };
+            } else {
+              return {
+                ...prevFilter,
+                [filterType]: [...selectedItems, value],
+              };
+            }
           } else {
             return {
               ...prevFilter,
-              [filterType]: [...selectedItems, value],
+              [filterType]: [],
             };
           }
-        } else {
-          return {
-            ...prevFilter,
-            [filterType]: [],
-          };
         }
       } else if (filterType === "departamento") {
         return {

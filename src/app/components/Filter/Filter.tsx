@@ -3,9 +3,15 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { Button, Checkbox, ListItemText } from "@mui/material";
+import {
+  Autocomplete,
+  Button,
+  Checkbox,
+  Chip,
+  ListItemText,
+  TextField,
+} from "@mui/material";
 import Box from "@mui/material/Box";
-import OutlinedInput from "@mui/material/OutlinedInput";
 import FilterHook from "@/app/hooks/FilterHook/FilterHook";
 import { Area, Personal } from "@/utils/interfaces/interface";
 import { MenuProps } from "@/utils/constants";
@@ -25,6 +31,10 @@ export default function Filter({ areas, personal }: FilterProps) {
     handleCleanFilters,
   } = FilterHook();
 
+  const uniqueAreas = areas.filter(
+    (area, index, self) => index === self.findIndex((a) => a.area === area.area)
+  );
+
   return (
     <Box
       sx={{
@@ -43,9 +53,46 @@ export default function Filter({ areas, personal }: FilterProps) {
           marginBottom: "1rem",
         }}
       >
-        <Grid size={{ md: 2, lg: 2, xs: 12 }}>
+        <Grid size={{ md: 2, lg: 4, xs: 12 }}>
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Areas</InputLabel>
+            <Autocomplete
+              multiple
+              id="autocomplete-multiple-checkbox"
+              options={uniqueAreas}
+              disableCloseOnSelect
+              getOptionLabel={(option) => option.area}
+              value={areas.filter((area) => filters.area.includes(area.id))}
+              onChange={(event, newValue) => {
+                const selectedIds = newValue.map((area) => area.id);
+                handleChangeFilter({ target: { value: selectedIds } }, "area");
+              }}
+              renderOption={(props, option, { selected }) => {
+                const { key, ...rest } = props;
+                return (
+                  <li {...rest} key={key}>
+                    <Checkbox style={{ marginRight: 8 }} checked={selected} />
+                    <ListItemText primary={option.area} />
+                  </li>
+                );
+              }}
+              renderTags={(value, getTagProps) =>
+                value.map((option, index) => (
+                  <Chip
+                    label={option.area}
+                    {...getTagProps({ index })}
+                  />
+                ))
+              }
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Areas"
+                  placeholder="Seleccione"
+                />
+              )}
+            />
+            {/* <InputLabel id="demo-simple-select-label">Areas</InputLabel>
             <Select
               labelId="demo-multiple-checkbox-label"
               id="demo-multiple-checkbox"
@@ -70,7 +117,7 @@ export default function Filter({ areas, personal }: FilterProps) {
                   <ListItemText primary={area.area} />
                 </MenuItem>
               ))}
-            </Select>
+            </Select> */}
           </FormControl>
         </Grid>
         <Grid size={{ md: 2, lg: 2, xs: 12 }}>

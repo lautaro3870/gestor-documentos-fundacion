@@ -34,6 +34,7 @@ export interface PersonalxProyecto {
     id: number;
     nombre: string;
     activo: boolean;
+    foto?: string;
   };
 }
 
@@ -45,6 +46,8 @@ export type Area = {
 export type Personal = {
   id: number;
   nombre: string;
+  activo: boolean;
+  foto?: string;
 };
 
 export type FilterProp = {

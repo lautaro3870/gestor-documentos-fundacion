@@ -9,6 +9,7 @@ import {
 import styles from "../../page.module.css";
 import { PersonalxProyecto } from "@/utils/interfaces/interface";
 import { useState } from "react";
+import Link from "next/link";
 
 type ListPersonalProps = {
   personal: PersonalxProyecto[] | undefined;
@@ -76,16 +77,18 @@ export default function ListPersonal({ personal }: ListPersonalProps) {
             sx={{ minWidth: 275, display: "flex" }}
             variant="outlined"
           >
-            <CardMedia
-              sx={{
-                height: 100,
-                width: 100,
-                margin: 1,
-                borderRadius: "1rem",
-              }}
-              image="https://fundacionbariloche.org.ar/wp-content/uploads/2023/10/gonzalobravo.png"
-              component="img"
-            />
+            <Link href="https://www.google.com" target="_blank">
+              <CardMedia
+                sx={{
+                  height: 100,
+                  width: 100,
+                  margin: 1,
+                  borderRadius: "1rem",
+                }}
+                image={autor.personal.foto}
+                component="img"
+              />
+            </Link>
             <CardContent>
               <Typography
                 variant="h5"

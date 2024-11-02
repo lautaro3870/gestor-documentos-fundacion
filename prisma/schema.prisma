@@ -17,6 +17,7 @@ model personal {
   id Int @unique
   nombre String
   activo Boolean
+  foto String?
   proyectos equipoxproyecto[]
 }
 
