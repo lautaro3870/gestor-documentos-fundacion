@@ -6,6 +6,7 @@ import styles from "./page.module.css";
 import ListCards from "@/app/components/ListCards/ListCards";
 import { CircularProgress } from "@mui/material";
 import MainPageHook from "./hooks/MainPageHook/MainPageHook";
+import Footer from "./components/Footer/Footer";
 
 export default function MainPage() {
   const { areas, dataLoaded, listCards, personal } = MainPageHook();
@@ -28,6 +29,7 @@ export default function MainPage() {
           <div className={styles.paginator}>
             <Paginator />
           </div>
+          <Footer  />
         </div>
       ) : (
         <CircularProgress size="3rem" />
