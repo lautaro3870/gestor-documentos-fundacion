@@ -85,7 +85,7 @@ export default function ListPersonal({ personal }: ListPersonalProps) {
                   margin: 1,
                   borderRadius: "1rem",
                 }}
-                image={autor.personal.foto}
+                image={autor.personal.foto || ""}
                 component="img"
               />
             </Link>

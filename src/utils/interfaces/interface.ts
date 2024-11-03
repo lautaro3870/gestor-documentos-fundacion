@@ -34,7 +34,7 @@ export interface PersonalxProyecto {
     id: number;
     nombre: string;
     activo: boolean;
-    foto?: string;
+    foto?: string | null;
   };
 }
 
@@ -47,7 +47,7 @@ export type Personal = {
   id: number;
   nombre: string;
   activo: boolean;
-  foto?: string;
+  foto?: string | null;
 };
 
 export type FilterProp = {

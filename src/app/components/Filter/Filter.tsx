@@ -92,32 +92,6 @@ export default function Filter({ areas, personal }: FilterProps) {
                 />
               )}
             />
-            {/* <InputLabel id="demo-simple-select-label">Areas</InputLabel>
-            <Select
-              labelId="demo-multiple-checkbox-label"
-              id="demo-multiple-checkbox"
-              value={filters.area}
-              label="Areas"
-              onChange={(e) => handleChangeFilter(e, "area")}
-              input={<OutlinedInput id="select-multiple-chip" label="Area" />}
-              renderValue={(selected) =>
-                selected
-                  .map((id) => {
-                    const areaObj = areas.find((area) => area.id === id);
-                    return areaObj ? areaObj.area : "";
-                  })
-                  .join(", ")
-              }
-              MenuProps={MenuProps}
-            >
-              <MenuItem value="">Area</MenuItem>
-              {areas.map((area: any, i: number) => (
-                <MenuItem key={i} value={area.id}>
-                  <Checkbox checked={filters.area.indexOf(area.id) > -1} />
-                  <ListItemText primary={area.area} />
-                </MenuItem>
-              ))}
-            </Select> */}
           </FormControl>
         </Grid>
         <Grid size={{ md: 2, lg: 2, xs: 12 }}>

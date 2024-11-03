@@ -32,8 +32,9 @@ export default function ListProjects() {
             height: "16rem",
             width: {
               lg: "75rem",
-              md: "80%",
+              md: "60rem",
               xs: "80%",
+              sm: "35rem"
             },
             margin: "auto",
           }}
