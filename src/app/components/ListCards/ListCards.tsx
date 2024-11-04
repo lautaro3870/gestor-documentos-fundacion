@@ -26,7 +26,7 @@ export default function ListCards({ listCards }: ListCardsProps) {
       <Grid container spacing={2}>
         {listCards?.map((card, index) => (
           <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
-            <Card key={index} sx={{ height: "20rem" }}>
+            <Card key={index} sx={{ height: "25rem", paddingBottom: "1rem" }}>
               <CardContent key={index}>
                 <Typography variant="body2" sx={{ color: "text.primary" }}>
                   <span>
@@ -39,7 +39,7 @@ export default function ListCards({ listCards }: ListCardsProps) {
                   variant="body2"
                   sx={{
                     color: "text.primary",
-                    height: "13rem",
+                    height: "15rem",
                     fontSize: "1.3rem",
                   }}
                 >

@@ -1,14 +1,24 @@
 import { Box, Typography } from "@mui/material";
 import SeparatorLine from "../SeparatorLine/SeparatorLine";
 import Grid from "@mui/material/Grid2";
+import Link from "next/link";
 
 export default function DirectionSection() {
   return (
     <Grid
       sx={{
-        xl: 2,
+        xl: 6,
         xs: 12,
-        lg: 2,
+        lg: 6,
+      }}
+      display="flex"
+      flexDirection={{
+        xl: "row",
+        xs: "column",
+      }}
+      margin={{
+        xs: "1rem",
+        xl: 0,
       }}
     >
       <Grid
@@ -16,9 +26,7 @@ export default function DirectionSection() {
           xl: 2,
           xs: 12,
           lg: 2,
-          margin: {
-            xs: "1rem",
-          }
+          marginRight: "1rem",
         }}
       >
         <Box
@@ -27,7 +35,6 @@ export default function DirectionSection() {
             flexDirection: "column",
             justifyItems: "flex-start",
             width: "auto",
-            marginRight: "1rem",
           }}
         >
           <Typography variant="h6">Sede Central Bariloche</Typography>
@@ -52,10 +59,14 @@ export default function DirectionSection() {
               Email
             </Typography>
             <Typography sx={{ fontSize: 14 }}>
-              info@fundacionbariloche.org.ar
+              <Link href="mailto:info@fundacionbariloche.org.ar">
+                info@fundacionbariloche.org.ar
+              </Link>
             </Typography>
             <Typography sx={{ fontSize: 14 }}>
-              idee@fundacionbariloche.org.ar
+              <Link href="mailto:idee@fundacionbariloche.org.ar">
+                idee@fundacionbariloche.org.ar
+              </Link>
             </Typography>
           </Box>
         </Box>
@@ -67,8 +78,11 @@ export default function DirectionSection() {
           xs: 12,
           lg: 2,
           marginLeft: {
+            xl: "1rem",
+          },
+          marginTop: {
             xs: "1rem",
-            xl: "4rem",
+            xl: 0,
           },
         }}
       >
@@ -102,7 +116,9 @@ export default function DirectionSection() {
               Email
             </Typography>
             <Typography sx={{ fontSize: 14 }}>
-              info@fundacionbariloche.org.ar
+              <Link href="mailto:info@fundacionbariloche.org.ar">
+                info@fundacionbariloche.org.ar
+              </Link>
             </Typography>
           </Box>
         </Box>
