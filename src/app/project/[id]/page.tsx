@@ -57,8 +57,8 @@ export default function Project({ params }: { params: { id: string } }) {
   };
 
   return (
-    <main className={project.personal.length !== 0 ? "" : styles.mainLoading}>
-      {project.personal.length === 0 ? (
+    <main className={project.personal?.length !== 0 ? "" : styles.mainLoading}>
+      {project.personal?.length === 0 ? (
         <CircularProgress size="3rem" />
       ) : (
         <div
