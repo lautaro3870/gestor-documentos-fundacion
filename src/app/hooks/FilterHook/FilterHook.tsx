@@ -1,3 +1,4 @@
+"use client"
 import {
   getProjectsFiltered,
 } from "@/actions/getDataFromDB";
