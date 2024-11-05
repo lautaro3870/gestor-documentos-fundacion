@@ -18,7 +18,12 @@ export default function MainPageHook() {
   const [listCards, setListCards] = useState<ListCardstype>([]);
 
   useEffect(() => {
-    const filters = JSON.parse(localStorage.getItem("filters") || "{}");
+    const filters = {
+      area: [],
+      departamento: "",
+      personal: [],
+      anio: []
+    };
     const fetchProjects = async () => {
       setDataLoaded(false);
       const projects = getProjectsFiltered(
@@ -38,7 +43,7 @@ export default function MainPageHook() {
         setPersonal(response[2]);
         setListCards(response[3]);
         setDataLoaded(true);
-        localStorage.setItem("dataLoaded", "true");
+        // localStorage.setItem("dataLoaded", "true");
       });
     };
     fetchProjects();
