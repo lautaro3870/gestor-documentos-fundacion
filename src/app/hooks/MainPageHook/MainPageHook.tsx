@@ -12,13 +12,18 @@ import { useAppContext } from "@/context";
 export default function MainPageHook() {
   type ListCardstype = ListCardsStruct[];
 
-  const { dataLoaded, setDataLoaded, setProjects } = useAppContext();
+  const { dataLoaded, setDataLoaded, setProjects, filters, setFilters } = useAppContext();
   const [areas, setAreas] = useState<Area[]>([]);
   const [personal, setPersonal] = useState<Personal[]>([]);
   const [listCards, setListCards] = useState<ListCardstype>([]);
 
   useEffect(() => {
-    const filters = JSON.parse(localStorage.getItem("filters") || "{}");
+    const storedFilters = JSON.parse(localStorage.getItem("filters") || "{}");
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      ...storedFilters
+    }));
+
     const fetchProjects = async () => {
       setDataLoaded(false);
       const projects = getProjectsFiltered(
@@ -38,7 +43,7 @@ export default function MainPageHook() {
         setPersonal(response[2]);
         setListCards(response[3]);
         setDataLoaded(true);
-        // localStorage.setItem("dataLoaded", "true");
+        localStorage.setItem("dataLoaded", "true");
       });
     };
     fetchProjects();

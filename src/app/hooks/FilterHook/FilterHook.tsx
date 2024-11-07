@@ -67,7 +67,7 @@ export default function FilterHook() {
   };
 
   const make = async () => {
-    // localStorage.setItem("filters", JSON.stringify(filters));
+    localStorage.setItem("filters", JSON.stringify(filters));
     const { projects, projectsCount } = await getProjectsFiltered(
       filters.area,
       filters.departamento,
@@ -82,7 +82,7 @@ export default function FilterHook() {
 
   const handleCleanFilters = async (e: any) => {
     e.preventDefault();
-    // localStorage.setItem("filters", JSON.stringify(filters));
+    localStorage.setItem("filters", JSON.stringify(filters));
     setFilters({
       area: [],
       departamento: "",
