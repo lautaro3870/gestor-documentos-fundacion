@@ -18,12 +18,7 @@ export default function MainPageHook() {
   const [listCards, setListCards] = useState<ListCardstype>([]);
 
   useEffect(() => {
-    const filters = {
-      area: [],
-      departamento: "",
-      personal: [],
-      anio: []
-    };
+    const filters = JSON.parse(localStorage.getItem("filters") || "{}");
     const fetchProjects = async () => {
       setDataLoaded(false);
       const projects = getProjectsFiltered(
