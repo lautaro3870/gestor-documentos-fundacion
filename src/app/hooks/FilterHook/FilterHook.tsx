@@ -7,7 +7,7 @@ import { generateArrayOfYears } from "@/utils/methods/serviceUtils";
 import { useAppContext } from "@/context";
 
 export default function FilterHook() {
-  const { setPaginator, setProjects, page, filters, setFilters, setPage, setIsLoading, isLoading } =
+  const { setPaginator, setProjects, page, filters, setFilters, setPage, setIsLoading } =
     useAppContext();
 
   const listYears = generateArrayOfYears();
