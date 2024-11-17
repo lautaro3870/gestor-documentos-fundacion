@@ -39,15 +39,18 @@ export default function ListCards({ listCards }: ListCardsProps) {
                   variant="body2"
                   sx={{
                     color: "text.primary",
-                    height: "15rem",
+                    height: "10rem",
                     fontSize: "1.3rem",
                   }}
                 >
                   {card.titulo}
                 </Typography>
 
-                <Grid container spacing={2} sx={{ marginTop: "-1rem" }}>
-                  <Grid size={9}>
+                <Grid container spacing={2} sx={{ marginTop: "8rem" }}>
+                  <Grid size={9} sx={{
+                    display: "flex",
+                    alignItems: "center"
+                  }}>
                     <Typography
                       variant="body2"
                       sx={{ color: "text.secondary" }}
