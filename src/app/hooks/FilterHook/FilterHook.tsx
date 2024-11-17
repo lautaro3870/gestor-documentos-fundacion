@@ -7,7 +7,7 @@ import { generateArrayOfYears } from "@/utils/methods/serviceUtils";
 import { useAppContext } from "@/context";
 
 export default function FilterHook() {
-  const { setPaginator, setProjects, page, filters, setFilters, setPage } =
+  const { setPaginator, setProjects, page, filters, setFilters, setPage, setIsLoading, isLoading } =
     useAppContext();
 
   const listYears = generateArrayOfYears();
@@ -63,11 +63,12 @@ export default function FilterHook() {
 
   const submitFilter = async (e: any) => {
     e.preventDefault();
-    await make();
+    await getProjects();
   };
 
-  const make = async () => {
+  const getProjects = async () => {
     localStorage.setItem("filters", JSON.stringify(filters));
+    setIsLoading(true);
     const { projects, projectsCount } = await getProjectsFiltered(
       filters.area,
       filters.departamento,
@@ -78,11 +79,13 @@ export default function FilterHook() {
     );
     setProjects(projects);
     setPaginator(projectsCount);
+    setIsLoading(false);
   };
 
   const handleCleanFilters = async (e: any) => {
     e.preventDefault();
     localStorage.setItem("filters", JSON.stringify(filters));
+    setIsLoading(true);
     setFilters({
       area: [],
       departamento: "",
@@ -93,6 +96,7 @@ export default function FilterHook() {
     setProjects(projects);
     setPage(1);
     setPaginator(projectsCount);
+    setIsLoading(false);
   };
 
   return {
@@ -102,6 +106,6 @@ export default function FilterHook() {
     submitFilter,
     handleCleanFilters,
     listYears,
-    make
+    getProjects
   };
 }

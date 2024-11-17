@@ -121,7 +121,33 @@ export default function Project({ params }: { params: { id: string } }) {
           >
             <Grid container spacing={4}>
               <Grid
-                size={{ xl: 8, md: 8, sm: 12, lg: 8, xs: 12 }}
+                size={{ xl: 8, md: 4, sm: 4, lg: 4, xs: 12 }}
+                sx={{
+                  paddingLeft: {
+                    xs: "1rem",
+                    lg: "17rem",
+                    xl: "22rem",
+                  },
+                  paddingRight: {
+                    xs: "1rem",
+                  },
+                }}
+              >
+                <Box>
+                  <Typography variant="h5" sx={{ fontSize: 25 }}>
+                    Cita
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{ fontSize: 20 }}
+                    align="justify"
+                  >
+                    {project.cita}
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid
+                size={{ xl: 8, md: 4, sm: 4, lg: 4, xs: 12 }}
                 sx={{
                   paddingLeft: {
                     xs: "1rem",
@@ -147,12 +173,12 @@ export default function Project({ params }: { params: { id: string } }) {
                 </Box>
               </Grid>
               <Grid
-                size={{ xl: 4, md: 4, sm: 12, lg: 4, xs: 12 }}
+                size={{ xl: 4, md: 4, sm: 4, lg: 4, xs: 12 }}
                 sx={{
                   marginTop: {
                     xs: "-15rem",
-                    lg: "-20rem",
-                    xl: "-20rem",
+                    lg: "-50rem",
+                    xl: "-34rem",
                   },
                   padding: {
                     xs: "1rem",
