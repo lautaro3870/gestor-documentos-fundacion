@@ -29,12 +29,15 @@ export default function ListProjects() {
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-start",
-            height: "16rem",
+            height: {
+              lg: "16rem",
+              xs: "20rem"
+            },
             width: {
               lg: "75rem",
               md: "60rem",
               xs: "80%",
-              sm: "35rem"
+              sm: "35rem",
             },
             margin: "auto",
           }}
@@ -49,14 +52,21 @@ export default function ListProjects() {
               display: {
                 xs: "none",
                 xl: "block",
-                lg: "block"
+                lg: "block",
               },
+              marginLeft: "1rem",
             }}
             image="https://fundacionbariloche.org.ar/wp-content/uploads/2024/07/pdf.png"
           />
-          <CardContent sx={{
-            marginRight: "auto"
-          }}>
+          <CardContent
+            sx={{
+              marginRight: "auto",
+              width: {
+                lg: "50rem",
+                xs: "20rem",
+              }
+            }}
+          >
             <Typography gutterBottom sx={{ fontSize: "1rem" }} component="div">
               {project.departamento} - {project.anio_inicio}
             </Typography>
@@ -66,12 +76,6 @@ export default function ListProjects() {
               component="div"
               fontSize={{
                 xs: "0.9rem",
-              }}
-              sx={{
-                width: {
-                  lg: "50rem",
-                  xs: "12rem"
-                }
               }}
             >
               {project.titulo}

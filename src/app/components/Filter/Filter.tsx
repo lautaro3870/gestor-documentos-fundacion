@@ -35,6 +35,11 @@ export default function Filter({ areas, personal }: FilterProps) {
     (area, index, self) => index === self.findIndex((a) => a.area === area.area)
   );
 
+  const uniquePersonal = personal.filter(
+    (personal, index, self) =>
+      index === self.findLastIndex((p) => p.nombre === personal.nombre)
+  );
+
   return (
     <Box
       sx={{
@@ -53,7 +58,7 @@ export default function Filter({ areas, personal }: FilterProps) {
           marginBottom: "1rem",
         }}
       >
-        <Grid size={{ md: 2, lg: 4, xs: 12 }}>
+        <Grid size={{ md: 2, lg: 3, xs: 12 }}>
           <FormControl fullWidth>
             <Autocomplete
               multiple
@@ -77,10 +82,7 @@ export default function Filter({ areas, personal }: FilterProps) {
               }}
               renderTags={(value, getTagProps) =>
                 value.map((option, index) => (
-                  <Chip
-                    label={option.area}
-                    {...getTagProps({ index })}
-                  />
+                  <Chip label={option.area} {...getTagProps({ index })} />
                 ))
               }
               renderInput={(params) => (
@@ -111,8 +113,45 @@ export default function Filter({ areas, personal }: FilterProps) {
             </Select>
           </FormControl>
         </Grid>
-        <Grid size={{ md: 2, lg: 2, xs: 12 }}>
+        <Grid size={{ md: 2, lg: 3, xs: 12 }}>
           <FormControl fullWidth>
+            <Autocomplete
+              multiple
+              id="autocomplete-autores-multiple-checkbox"
+              options={uniquePersonal}
+              disableCloseOnSelect
+              getOptionLabel={(option) => option.nombre}
+              value={personal.filter((p) => filters.personal.includes(p.id))}
+              onChange={(event, newValue) => {
+                const selectedIds = newValue.map((personal) => personal.id);
+                handleChangeFilter({ target: { value: selectedIds } }, "personal");
+              }}
+              renderOption={(props, option, { selected }) => {
+                const { key, ...rest } = props;
+                return (
+                  <li {...rest} key={key}>
+                    <Checkbox style={{ marginRight: 8 }} checked={selected} />
+                    <ListItemText primary={option.nombre} />
+                  </li>
+                );
+              }}
+              renderTags={(value, getTagProps) =>
+                value.map((option, index) => (
+                  <Chip label={option.nombre} {...getTagProps({ index })} />
+                ))
+              }
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Autores"
+                  placeholder="Seleccione"
+                />
+              )}
+            />
+          </FormControl>
+
+          {/* <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Autores</InputLabel>
             <Select
               labelId="demo-simple-select-label"
@@ -138,7 +177,7 @@ export default function Filter({ areas, personal }: FilterProps) {
                 </MenuItem>
               ))}
             </Select>
-          </FormControl>
+          </FormControl> */}
         </Grid>
         <Grid size={{ md: 2, lg: 2, xs: 12 }}>
           <FormControl fullWidth>
