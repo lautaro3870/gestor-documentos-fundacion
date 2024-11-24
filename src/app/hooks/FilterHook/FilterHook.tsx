@@ -74,8 +74,6 @@ export default function FilterHook() {
       filters.departamento,
       filters.personal,
       filters.anio,
-      5,
-      page
     );
     setProjects(projects);
     setPaginator(projectsCount);
@@ -92,7 +90,7 @@ export default function FilterHook() {
       personal: [],
       anio: [],
     });
-    const { projects, projectsCount } = await getProjectsFiltered([], "", [], [], 5, 5);
+    const { projects, projectsCount } = await getProjectsFiltered([], "", [], []);
     setProjects(projects);
     setPage(1);
     setPaginator(projectsCount);

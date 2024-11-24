@@ -31,8 +31,6 @@ export default function MainPageHook() {
         filters.departamento,
         filters.personal,
         filters.anio,
-        5,
-        5
       );
       const areas = getAreas();
       const personal = getPersonal();
