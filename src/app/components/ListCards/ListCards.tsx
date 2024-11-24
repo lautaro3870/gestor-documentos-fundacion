@@ -6,6 +6,7 @@ import { Box, Button } from "@mui/material";
 import { ListCardsStruct } from "@/utils/interfaces/interface";
 import { getMonthByNumber } from "@/utils/methods/serviceUtils";
 import Grid from "@mui/material/Grid2";
+import Link from "next/link";
 
 type ListCardsProps = {
   listCards: ListCardsStruct[];
@@ -45,18 +46,21 @@ export default function ListCards({ listCards }: ListCardsProps) {
                       lg: "1.2rem",
                       md: "1.1rem",
                       sm: "1.1rem",
-                      xs: "1.1rem"
-                    }
+                      xs: "1.1rem",
+                    },
                   }}
                 >
                   {card.titulo}
                 </Typography>
 
                 <Grid container spacing={2} sx={{ marginTop: "7rem" }}>
-                  <Grid size={9} sx={{
-                    display: "flex",
-                    alignItems: "center"
-                  }}>
+                  <Grid
+                    size={9}
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
                     <Typography
                       variant="body2"
                       sx={{ color: "text.secondary" }}
@@ -65,9 +69,11 @@ export default function ListCards({ listCards }: ListCardsProps) {
                     </Typography>
                   </Grid>
                   <Grid size={3}>
-                    <Button>
-                      <AddIcon />
-                    </Button>
+                    <Link href={`/project/${card.id}`}>
+                      <Button>
+                        <AddIcon />
+                      </Button>
+                    </Link>
                   </Grid>
                 </Grid>
               </CardContent>

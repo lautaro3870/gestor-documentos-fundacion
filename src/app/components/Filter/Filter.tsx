@@ -43,7 +43,12 @@ export default function Filter({ areas, personal }: FilterProps) {
   return (
     <Box
       sx={{
-        width: "80%",
+        width: {
+          xl: "100%",
+          lg: "100%",
+          md: "100%",
+          xs: "80%",
+        },
         maxWidth: "1200px",
         margin: "auto",
       }}
@@ -93,6 +98,13 @@ export default function Filter({ areas, personal }: FilterProps) {
                   placeholder="Seleccione"
                 />
               )}
+              PaperComponent={({ children }) => (
+                <div
+                  style={{ width: 250, padding: 8, backgroundColor: "#fff" }}
+                >
+                  {children}
+                </div>
+              )}
             />
           </FormControl>
         </Grid>
@@ -124,7 +136,10 @@ export default function Filter({ areas, personal }: FilterProps) {
               value={personal.filter((p) => filters.personal.includes(p.id))}
               onChange={(event, newValue) => {
                 const selectedIds = newValue.map((personal) => personal.id);
-                handleChangeFilter({ target: { value: selectedIds } }, "personal");
+                handleChangeFilter(
+                  { target: { value: selectedIds } },
+                  "personal"
+                );
               }}
               renderOption={(props, option, { selected }) => {
                 const { key, ...rest } = props;
@@ -148,36 +163,15 @@ export default function Filter({ areas, personal }: FilterProps) {
                   placeholder="Seleccione"
                 />
               )}
+              PaperComponent={({ children }) => (
+                <div
+                  style={{ width: 250, padding: 8, backgroundColor: "#fff" }}
+                >
+                  {children}
+                </div>
+              )}
             />
           </FormControl>
-
-          {/* <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Autores</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={filters.personal}
-              label="Autores"
-              onChange={(e) => handleChangeFilter(e, "personal")}
-              renderValue={(selected) =>
-                selected
-                  .map((id) => {
-                    const personalObj = personal.find((p) => p.id === id);
-                    return personalObj ? personalObj.nombre : "";
-                  })
-                  .join(", ")
-              }
-              MenuProps={MenuProps}
-            >
-              <MenuItem value="">Autores</MenuItem>
-              {personal.map((p: Personal, i: number) => (
-                <MenuItem key={i} value={p.id}>
-                  <Checkbox checked={filters.personal.indexOf(p.id) > -1} />
-                  <ListItemText primary={p.nombre} />
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl> */}
         </Grid>
         <Grid size={{ md: 2, lg: 2, xs: 12 }}>
           <FormControl fullWidth>

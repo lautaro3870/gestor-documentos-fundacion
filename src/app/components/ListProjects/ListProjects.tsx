@@ -8,9 +8,16 @@ import { ListCardsStruct } from "@/utils/interfaces/interface";
 import { useAppContext } from "@/context";
 import Link from "next/link";
 import { CircularProgress } from "@mui/material";
+import { useEffect, useState } from "react";
 
-export default function ListProjects() {
-  const { projects, isLoading } = useAppContext();
+type ListProjectsProps = {
+  projects: ListCardsStruct[]
+}
+
+export default function ListProjects({ projects }: ListProjectsProps) {
+  const { isLoading, page } = useAppContext();
+  const projectsPerPage = 5;
+  const [currentProjects, setCurrentProjects] = useState<ListCardsStruct[]>([]);
 
   const getPersonalList = (card: ListCardsStruct) => {
     return card?.personal.map((p, index) => (
@@ -21,13 +28,23 @@ export default function ListProjects() {
     ));
   };
 
+  useEffect(() => {
+    // getProjects();
+    const currentProjects = projects.slice(
+      (page - 1) * projectsPerPage,
+      page * projectsPerPage
+    );
+    console.log(currentProjects);
+    setCurrentProjects(currentProjects);
+  }, [page])
+
   return (
     <div>
       {isLoading ? (
         <CircularProgress size="3rem" />
       ) : (
         <div>
-          {projects.map((project: ListCardsStruct, index: number) => (
+          {currentProjects.map((project: ListCardsStruct, index: number) => (
             <Card
               variant="outlined"
               sx={{

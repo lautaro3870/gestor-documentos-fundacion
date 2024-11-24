@@ -58,8 +58,6 @@ export const getProjectsFiltered = async (
   page: number
 ) => {
   const projects = await prisma.proyectos.findMany({
-    take: takeValue,
-    skip: (page - 1) * takeValue,
     include: {
       areas: {
         include: {

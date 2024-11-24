@@ -9,7 +9,7 @@ import MainPageHook from "./hooks/MainPageHook/MainPageHook";
 import Footer from "./components/Footer/Footer";
 
 export default function MainPage() {
-  const { areas, dataLoaded, listCards, personal } = MainPageHook();
+  const { areas, dataLoaded, listCards, personal, projects } = MainPageHook();
 
   return (
     <main className={dataLoaded ? "" : styles.mainLoading}>
@@ -24,7 +24,7 @@ export default function MainPage() {
             <Filter areas={areas} personal={personal} />
           </div>
           <div className={styles.projects}>
-            <ListProjects />
+            <ListProjects projects={projects}/>
           </div>
           <div className={styles.paginator}>
             <Paginator />

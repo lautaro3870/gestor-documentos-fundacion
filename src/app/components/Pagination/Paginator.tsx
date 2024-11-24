@@ -4,11 +4,9 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { useAppContext } from "@/context";
 import { getTotalProjectsCount } from "@/actions/getDataFromDB";
-import FilterHook from "@/app/hooks/FilterHook/FilterHook";
 
 export default function Paginator() {
   const { paginator, setPaginator, setPage, page } = useAppContext();
-  const { getProjects } = FilterHook();
 
   React.useEffect(() => {
     const fetchData = async() => {
@@ -21,10 +19,6 @@ export default function Paginator() {
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
-
-  React.useEffect(() => {
-    getProjects();
-  }, [page])
 
   return (
     <Stack spacing={3}>

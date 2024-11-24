@@ -12,7 +12,7 @@ import { useAppContext } from "@/context";
 export default function MainPageHook() {
   type ListCardstype = ListCardsStruct[];
 
-  const { dataLoaded, setDataLoaded, setProjects, filters, setFilters } = useAppContext();
+  const { dataLoaded, setDataLoaded, setProjects, filters, setFilters, projects, setIsLoading } = useAppContext();
   const [areas, setAreas] = useState<Area[]>([]);
   const [personal, setPersonal] = useState<Personal[]>([]);
   const [listCards, setListCards] = useState<ListCardstype>([]);
@@ -43,6 +43,7 @@ export default function MainPageHook() {
         setPersonal(response[2]);
         setListCards(response[3]);
         setDataLoaded(true);
+        setIsLoading(false);
         localStorage.setItem("dataLoaded", "true");
       });
     };
@@ -54,5 +55,6 @@ export default function MainPageHook() {
     areas,
     personal,
     listCards,
+    projects
   };
 }
