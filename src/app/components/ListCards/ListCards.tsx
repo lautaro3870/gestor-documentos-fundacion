@@ -40,13 +40,19 @@ export default function ListCards({ listCards }: ListCardsProps) {
                   sx={{
                     color: "text.primary",
                     height: "10rem",
-                    fontSize: "1.3rem",
+                    fontSize: {
+                      xl: "1.2rem",
+                      lg: "1.2rem",
+                      md: "1.1rem",
+                      sm: "1.1rem",
+                      xs: "1.1rem"
+                    }
                   }}
                 >
                   {card.titulo}
                 </Typography>
 
-                <Grid container spacing={2} sx={{ marginTop: "8rem" }}>
+                <Grid container spacing={2} sx={{ marginTop: "7rem" }}>
                   <Grid size={9} sx={{
                     display: "flex",
                     alignItems: "center"
