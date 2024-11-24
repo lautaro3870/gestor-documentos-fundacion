@@ -54,8 +54,6 @@ export const getProjectsFiltered = async (
   depto: string,
   personalId: number[],
   anio: number[],
-  takeValue: number,
-  page: number
 ) => {
   const projects = await prisma.proyectos.findMany({
     include: {
