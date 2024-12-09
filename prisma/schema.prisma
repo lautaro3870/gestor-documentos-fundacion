@@ -18,6 +18,7 @@ model personal {
   nombre String
   activo Boolean
   foto String?
+  perfil String?
   proyectos equipoxproyecto[]
 }
 

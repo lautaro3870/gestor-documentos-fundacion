@@ -47,6 +47,7 @@ export default function ListPersonal({ personal }: ListPersonalProps) {
       sx={{
         maxWidth: {
           xl: "20rem",
+          lg: "20rem"
         },
       }}
       className={styles.cardContainer}
@@ -77,7 +78,7 @@ export default function ListPersonal({ personal }: ListPersonalProps) {
             sx={{ minWidth: 275, display: "flex" }}
             variant="outlined"
           >
-            <Link href="https://www.google.com" target="_blank">
+            <Link href={autor.personal.perfil || ""} target="_blank">
               <CardMedia
                 sx={{
                   height: 100,
@@ -85,7 +86,7 @@ export default function ListPersonal({ personal }: ListPersonalProps) {
                   margin: 1,
                   borderRadius: "1rem",
                 }}
-                image={autor.personal.foto || ""}
+                image={autor.personal.foto || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'}
                 component="img"
               />
             </Link>

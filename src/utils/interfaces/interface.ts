@@ -35,6 +35,7 @@ export interface PersonalxProyecto {
     nombre: string;
     activo: boolean;
     foto?: string | null;
+    perfil?: string | null;
   };
 }
 
@@ -48,6 +49,7 @@ export type Personal = {
   nombre: string;
   activo: boolean;
   foto?: string | null;
+  perfil?: string | null;
 };
 
 export type FilterProp = {
