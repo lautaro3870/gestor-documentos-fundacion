@@ -49,6 +49,7 @@ export default function ListPersonal({ personal }: ListPersonalProps) {
           xl: "20rem",
           lg: "20rem"
         },
+        marginTop: "-4rem"
       }}
       className={styles.cardContainer}
     >

@@ -125,8 +125,9 @@ export default function Project({ params }: { params: { id: string } }) {
             }}
           >
             <Grid container spacing={4}>
+              {/* Columna Izquierda */}
               <Grid
-                size={{ xl: 8, md: 4, sm: 4, lg: 8, xs: 12 }}
+                size={{ xs: 12, md: 8, lg: 8, sm: 8, xl: 8 }}
                 sx={{
                   paddingLeft: {
                     xs: "1rem",
@@ -150,21 +151,7 @@ export default function Project({ params }: { params: { id: string } }) {
                     {project.cita}
                   </Typography>
                 </Box>
-              </Grid>
-              <Grid
-                size={{ xl: 8, md: 4, sm: 4, lg: 8, xs: 12 }}
-                sx={{
-                  paddingLeft: {
-                    xs: "1rem",
-                    lg: "20rem",
-                    xl: "20rem",
-                  },
-                  paddingRight: {
-                    xs: "1rem",
-                  },
-                }}
-              >
-                <Box sx={{ width: "auto", margin: "auto" }}>
+                <Box sx={{ marginTop: "2rem" }}>
                   <Typography variant="h5" sx={{ fontSize: 25 }}>
                     Descripción
                   </Typography>
@@ -177,21 +164,19 @@ export default function Project({ params }: { params: { id: string } }) {
                   </Typography>
                 </Box>
               </Grid>
+
+              {/* Columna Derecha: Listado de Personal */}
               <Grid
-                size={{ xl: 4, md: 4, sm: 4, lg: 4, xs: 12 }}
+                size={{ xs: 12, md: 4, lg: 4, sm: 12, xl: 4 }}
                 sx={{
-                  marginTop: {
-                    xs: "-15rem",
-                    lg: "-35rem",
-                    xl: "-35rem",
-                  },
-                  padding: {
-                    xs: "1rem",
-                  },
-                  paddingLeft: "3rem",
+                  position: "sticky", // Fija la columna derecha
+                  height: "fit-content", // Ajusta automáticamente a su contenido
+                  padding: "1rem",
                 }}
               >
-                <ListPersonal personal={project?.personal} />
+                <Box>
+                  <ListPersonal personal={project?.personal} />
+                </Box>
               </Grid>
             </Grid>
           </div>

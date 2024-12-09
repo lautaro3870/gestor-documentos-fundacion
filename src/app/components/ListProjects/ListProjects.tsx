@@ -29,14 +29,20 @@ export default function ListProjects({ projects }: ListProjectsProps) {
   };
 
   useEffect(() => {
-    // getProjects();
     const currentProjects = projects.slice(
       (page - 1) * projectsPerPage,
       page * projectsPerPage
     );
-    console.log(currentProjects);
     setCurrentProjects(currentProjects);
   }, [page])
+
+  useEffect(() => {
+    const currentProjects = projects.slice(
+      (page - 1) * projectsPerPage,
+      page * projectsPerPage
+    );
+    setCurrentProjects(currentProjects);
+  }, [projects])
 
   return (
     <div>
