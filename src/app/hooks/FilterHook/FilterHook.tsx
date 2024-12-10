@@ -81,8 +81,14 @@ export default function FilterHook() {
   };
 
   const handleCleanFilters = async (e: any) => {
-    e.preventDefault();
+    const filters: FilterProp = {
+      anio: [],
+      area: [],
+      departamento: "",
+      personal: [],
+    };
     localStorage.setItem("filters", JSON.stringify(filters));
+    e.preventDefault();
     setIsLoading(true);
     setFilters({
       area: [],

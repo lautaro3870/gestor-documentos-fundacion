@@ -12,7 +12,15 @@ import { useAppContext } from "@/context";
 export default function MainPageHook() {
   type ListCardstype = ListCardsStruct[];
 
-  const { dataLoaded, setDataLoaded, setProjects, filters, setFilters, projects, setIsLoading } = useAppContext();
+  const {
+    dataLoaded,
+    setDataLoaded,
+    setProjects,
+    setFilters,
+    projects,
+    setIsLoading,
+    setPaginator,
+  } = useAppContext();
   const [areas, setAreas] = useState<Area[]>([]);
   const [personal, setPersonal] = useState<Personal[]>([]);
   const [listCards, setListCards] = useState<ListCardstype>([]);
@@ -21,16 +29,16 @@ export default function MainPageHook() {
     const storedFilters = JSON.parse(localStorage.getItem("filters") || "{}");
     setFilters((prevFilters) => ({
       ...prevFilters,
-      ...storedFilters
+      ...storedFilters,
     }));
 
     const fetchProjects = async () => {
       setDataLoaded(false);
       const projects = getProjectsFiltered(
-        filters.area,
-        filters.departamento,
-        filters.personal,
-        filters.anio,
+        storedFilters.area,
+        storedFilters.departamento,
+        storedFilters.personal,
+        storedFilters.anio
       );
       const areas = getAreas();
       const personal = getPersonal();
@@ -42,6 +50,7 @@ export default function MainPageHook() {
         setListCards(response[3]);
         setDataLoaded(true);
         setIsLoading(false);
+        setPaginator(response[0].projects.length);
         localStorage.setItem("dataLoaded", "true");
       });
     };
@@ -53,6 +62,6 @@ export default function MainPageHook() {
     areas,
     personal,
     listCards,
-    projects
+    projects,
   };
 }
