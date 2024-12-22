@@ -16,29 +16,29 @@ export default function MainPageHook() {
     dataLoaded,
     setDataLoaded,
     setProjects,
+    setFilters,
     projects,
     setIsLoading,
     setPaginator,
-    filters
   } = useAppContext();
   const [areas, setAreas] = useState<Area[]>([]);
   const [personal, setPersonal] = useState<Personal[]>([]);
   const [listCards, setListCards] = useState<ListCardstype>([]);
 
   useEffect(() => {
-    // const storedFilters = JSON.parse(localStorage.getItem("filters") || "{}");
-    // setFilters((prevFilters) => ({
-    //   ...prevFilters,
-    //   ...storedFilters,
-    // }));
+    const storedFilters = JSON.parse(localStorage.getItem("filters") || "{}");
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      ...storedFilters,
+    }));
 
     const fetchProjects = async () => {
       setDataLoaded(false);
       const projects = getProjectsFiltered(
-        filters.area || [],
-        filters.departamento || "",
-        filters.personal || [],
-        filters.anio || [],
+        storedFilters.area || [],
+        storedFilters.departamento || "",
+        storedFilters.personal || [],
+        storedFilters.anio || [],
       );
       const areas = getAreas();
       const personal = getPersonal();
