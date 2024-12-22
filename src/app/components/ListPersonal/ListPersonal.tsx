@@ -117,7 +117,7 @@ export default function ListPersonal({ personal }: ListPersonalProps) {
         ))
         .slice(0, value)}
       <Card>
-        {personal && personal.length >= 3 && !isOpen ? (
+        {personal && personal.length > 3 && !isOpen ? (
           <CardContent
             sx={{
               display: "flex",

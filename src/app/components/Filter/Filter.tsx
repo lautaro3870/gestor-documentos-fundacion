@@ -197,7 +197,7 @@ export default function Filter({ areas, personal }: FilterProps) {
         </Grid>
         <Grid
           size={{ md: 2, lg: 2, xs: 12 }}
-          sx={{ display: "flex", flexDirection: "row" }}
+          sx={{ display: "flex", flexDirection: "row", justifyContent: "center" }}
         >
           <Button
             variant="outlined"

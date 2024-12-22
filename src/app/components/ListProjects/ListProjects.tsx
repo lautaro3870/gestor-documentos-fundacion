@@ -9,10 +9,11 @@ import { useAppContext } from "@/context";
 import Link from "next/link";
 import { CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
+import styles from "../../page.module.css";
 
 type ListProjectsProps = {
-  projects: ListCardsStruct[]
-}
+  projects: ListCardsStruct[];
+};
 
 export default function ListProjects({ projects }: ListProjectsProps) {
   const { isLoading, page } = useAppContext();
@@ -34,7 +35,7 @@ export default function ListProjects({ projects }: ListProjectsProps) {
       page * projectsPerPage
     );
     setCurrentProjects(currentProjects);
-  }, [page])
+  }, [page]);
 
   useEffect(() => {
     const currentProjects = projects.slice(
@@ -42,12 +43,12 @@ export default function ListProjects({ projects }: ListProjectsProps) {
       page * projectsPerPage
     );
     setCurrentProjects(currentProjects);
-  }, [projects])
+  }, [projects]);
 
   return (
-    <div>
+    <div className={isLoading ? styles.isLoading : ""}>
       {isLoading ? (
-        <CircularProgress size="3rem" />
+        <CircularProgress sx={{marginTop: "6rem" }} size="3rem" />
       ) : (
         <div>
           {currentProjects.map((project: ListCardsStruct, index: number) => (
@@ -63,9 +64,9 @@ export default function ListProjects({ projects }: ListProjectsProps) {
                 },
                 width: {
                   lg: "75rem",
-                  md: "60rem",
+                  md: "55rem",
                   xs: "80%",
-                  sm: "35rem",
+                  sm: "50rem",
                 },
                 margin: "auto",
               }}

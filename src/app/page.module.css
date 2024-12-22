@@ -45,3 +45,10 @@
   flex-direction: column;
   margin-top: 15rem;
 }
+
+.isLoading {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 50rem;
+}

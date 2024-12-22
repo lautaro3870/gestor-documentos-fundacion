@@ -4,7 +4,6 @@ import {
 import Grid from "@mui/material/Grid2";
 import SeparatorLine from "./SeparatorLine/SeparatorLine";
 import DirectionSection from "./DirectionSection/DirectionSection";
-import FormSection from "./FormSection/FormSection";
 
 export default function Footer() {
   return (
@@ -36,8 +35,6 @@ export default function Footer() {
       </Grid>
       <SeparatorLine />
       <DirectionSection />
-      <SeparatorLine />
-      <FormSection />
     </Grid>
   );
 }

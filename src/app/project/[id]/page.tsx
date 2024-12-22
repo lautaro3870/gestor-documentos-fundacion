@@ -75,7 +75,7 @@ export default function Project({ params }: { params: { id: string } }) {
             sx={{
               height: "auto",
               width: "100%",
-              marginBottom: "1rem" /* Empuja el contenido de abajo */,
+              marginBottom: "1rem",
               display: "flex",
               flexDirection: "column",
             }}
@@ -125,7 +125,6 @@ export default function Project({ params }: { params: { id: string } }) {
             }}
           >
             <Grid container spacing={4}>
-              {/* Columna Izquierda */}
               <Grid
                 size={{ xs: 12, md: 8, lg: 8, sm: 8, xl: 8 }}
                 sx={{
@@ -139,25 +138,43 @@ export default function Project({ params }: { params: { id: string } }) {
                   },
                 }}
               >
-                <Box>
-                  <Typography variant="h5" sx={{ fontSize: 25 }}>
-                    Cita
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{ fontSize: 20 }}
-                    align="justify"
-                  >
-                    {project.cita}
-                  </Typography>
-                </Box>
+                {project.cita === "" ? (
+                  <div></div>
+                ) : (
+                  <Box>
+                    <Typography variant="h5" sx={{ fontSize: 25 }}>
+                      Cita
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        fontSize: 20,
+                        fontStyle: "italic",
+                      }}
+                      align="justify"
+                    >
+                      {project.cita}
+                    </Typography>
+                  </Box>
+                )}
+
                 <Box sx={{ marginTop: "2rem" }}>
                   <Typography variant="h5" sx={{ fontSize: 25 }}>
                     Descripción
                   </Typography>
                   <Typography
                     variant="body1"
-                    sx={{ fontSize: 20 }}
+                    sx={{
+                      fontSize: 20,
+                      "&::first-letter": {
+                        textTransform: "uppercase",
+                        fontSize: 55,
+                        lineHeight: "0.8", // Ajusta la altura de línea de la primera letra
+                        float: "left", // Hace que la letra "flote" a la izquierda
+                        marginRight: ".5rem", // Espacio entre la primera letra y el texto
+                        marginTop: ".3rem", // Ajusta la posición vertical
+                      },
+                    }}
                     align="justify"
                   >
                     {project.descripcion}
@@ -165,13 +182,15 @@ export default function Project({ params }: { params: { id: string } }) {
                 </Box>
               </Grid>
 
-              {/* Columna Derecha: Listado de Personal */}
               <Grid
                 size={{ xs: 12, md: 4, lg: 4, sm: 12, xl: 4 }}
                 sx={{
-                  position: "sticky", // Fija la columna derecha
+                  position: "sticky",
                   height: "fit-content", // Ajusta automáticamente a su contenido
                   padding: "1rem",
+                  paddingTop: {
+                    sx: "3rem"
+                  }
                 }}
               >
                 <Box>
