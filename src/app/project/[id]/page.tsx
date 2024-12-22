@@ -189,7 +189,9 @@ export default function Project({ params }: { params: { id: string } }) {
                   height: "fit-content", // Ajusta automáticamente a su contenido
                   padding: "1rem",
                   paddingTop: {
-                    sx: "3rem"
+                    xl: "1rem",
+                    lg: "1rem",
+                    xs: "3rem"
                   }
                 }}
               >
