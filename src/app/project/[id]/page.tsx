@@ -138,7 +138,7 @@ export default function Project({ params }: { params: { id: string } }) {
                   },
                 }}
               >
-                {project.cita === "" ? (
+                {project.cita === null ? (
                   <div></div>
                 ) : (
                   <Box>
@@ -191,7 +191,8 @@ export default function Project({ params }: { params: { id: string } }) {
                   paddingTop: {
                     xl: "1rem",
                     lg: "1rem",
-                    xs: "3rem"
+                    xs: "3rem",
+                    md: "1rem"
                   }
                 }}
               >

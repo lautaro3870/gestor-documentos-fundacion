@@ -10,6 +10,8 @@ import styles from "../../page.module.css";
 import { PersonalxProyecto } from "@/utils/interfaces/interface";
 import { useState } from "react";
 import Link from "next/link";
+import Grid from "@mui/material/Grid2";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 type ListPersonalProps = {
   personal: PersonalxProyecto[] | undefined;
@@ -47,9 +49,9 @@ export default function ListPersonal({ personal }: ListPersonalProps) {
       sx={{
         maxWidth: {
           xl: "20rem",
-          lg: "20rem"
+          lg: "20rem",
         },
-        marginTop: "-4rem"
+        marginTop: "-4rem",
       }}
       className={styles.cardContainer}
     >
@@ -79,40 +81,54 @@ export default function ListPersonal({ personal }: ListPersonalProps) {
             sx={{ minWidth: 275, display: "flex" }}
             variant="outlined"
           >
-            <Link href={autor.personal.perfil || ""} target="_blank">
-              <CardMedia
-                sx={{
-                  height: 100,
-                  width: 100,
-                  margin: 1,
-                  borderRadius: "1rem",
-                }}
-                image={autor.personal.foto || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'}
-                component="img"
-              />
-            </Link>
-            <CardContent>
-              <Typography
-                variant="h5"
-                key={i}
-                sx={{
-                  fontSize: 20,
-                  height: "auto",
-                  width: "10rem",
-                }}
-                component="div"
-              >
-                {autor.personal.nombre}
-              </Typography>
-              <Typography variant="h1" sx={{ fontSize: 15 }}>
-                {getChargeOfPersonal(autor).map((a) => (
-                  <div key={a}>
-                    <span key={a}>{a}</span>
-                    <br />
-                  </div>
-                ))}
-              </Typography>
-            </CardContent>
+            <Grid container>
+              <Grid size={4}>
+                <CardMedia
+                  sx={{
+                    height: 100,
+                    width: 100,
+                    margin: 1,
+                    borderRadius: "1rem",
+                  }}
+                  image={
+                    autor.personal.foto ||
+                    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                  }
+                  component="img"
+                />
+              </Grid>
+              <Grid size={4}>
+                <CardContent>
+                  <Typography
+                    variant="h5"
+                    key={i}
+                    sx={{
+                      fontSize: 20,
+                      height: "auto",
+                      width: "10rem",
+                    }}
+                    component="div"
+                  >
+                    {autor.personal.nombre}
+                  </Typography>
+                  <Typography variant="h1" sx={{ fontSize: 15 }}>
+                    {getChargeOfPersonal(autor).map((a) => (
+                      <div key={a}>
+                        <span key={a}>{a}</span>
+                        <br />
+                      </div>
+                    ))}
+                  </Typography>
+                </CardContent>
+              </Grid>
+              <Grid size={4} sx={{ paddingLeft: "3rem", paddingTop: "2.5rem" }}>
+                <Link href={autor.personal.perfil || ""} target="_blank">
+                  <Button>
+                    <ArrowRightAltIcon />
+                  </Button>
+                </Link>
+              </Grid>
+            </Grid>
           </Card>
         ))
         .slice(0, value)}
