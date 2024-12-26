@@ -11,6 +11,8 @@ export default function SeparatorLine() {
         display: {
           xs: "none",
           xl: "block",
+          md: "block",
+          sm: "none"
         },
       }}
     ></Box>

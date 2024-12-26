@@ -15,10 +15,13 @@ export default function DirectionSection() {
       flexDirection={{
         xl: "row",
         xs: "column",
+        md: "row",
+        sm: "row"
       }}
       margin={{
         xs: "1rem",
         xl: 0,
+        md: 0
       }}
     >
       <Grid
@@ -79,10 +82,12 @@ export default function DirectionSection() {
           lg: 2,
           marginLeft: {
             xl: "1rem",
+            md: "1rem"
           },
           marginTop: {
             xs: "1rem",
             xl: 0,
+            md: 0
           },
         }}
       >
