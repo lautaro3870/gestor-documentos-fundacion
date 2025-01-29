@@ -15,6 +15,8 @@ const AppContext = createContext<{
   setDataLoaded: React.Dispatch<React.SetStateAction<boolean>>;
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  isEmpty: boolean;
+  setIsEmpty: React.Dispatch<React.SetStateAction<boolean>>;
 }>({
   projects: [],
   setProjects: () => {},
@@ -33,7 +35,9 @@ const AppContext = createContext<{
   dataLoaded: false,
   setDataLoaded: () => {},
   isLoading: true,
-  setIsLoading: () => {}
+  setIsLoading: () => {},
+  isEmpty: false,
+  setIsEmpty: () => {},
 });
 
 export function AppWrapper({ children }: { children: React.ReactNode }) {
@@ -49,6 +53,7 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
   });
   const [dataLoaded, setDataLoaded] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isEmpty, setIsEmpty] = useState<boolean>(false);
 
   return (
     <AppContext.Provider
@@ -64,7 +69,9 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
         dataLoaded,
         setDataLoaded,
         isLoading,
-        setIsLoading
+        setIsLoading,
+        isEmpty,
+        setIsEmpty,
       }}
     >
       {children}
