@@ -35,6 +35,7 @@ export default function MainPageHook() {
     const fetchProjects = async () => {
       setDataLoaded(false);
       const projects = getProjectsFiltered(
+        storedFilters.titulo || "",
         storedFilters.area || [],
         storedFilters.departamento || "",
         storedFilters.personal || [],

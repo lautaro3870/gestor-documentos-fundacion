@@ -50,6 +50,7 @@ export const getPersonal = async () => {
 };
 
 export const getProjectsFiltered = async (
+  titulo: string,
   areasId: number[],
   depto: string,
   personalId: number[],
@@ -70,6 +71,10 @@ export const getProjectsFiltered = async (
     },
     where: {
       departamento: depto ? depto : undefined,
+      titulo: {
+        mode: "insensitive",
+        contains: titulo,
+      },
       anio_inicio:
         anio.length !== 0
           ? {
@@ -106,7 +111,7 @@ export const getProjectsFiltered = async (
       id: "desc",
     },
   });
-  const projectsCount = await getProjectCount(areasId, depto, personalId, anio);
+  const projectsCount = await getProjectCount(titulo, areasId, depto, personalId, anio);
   return {
     projects,
     projectsCount,
@@ -114,6 +119,7 @@ export const getProjectsFiltered = async (
 };
 
 export const getProjectCount = async (
+  titulo: string,
   areasId: number[],
   depto: string,
   personalId: number[],
@@ -122,6 +128,9 @@ export const getProjectCount = async (
   return await prisma.proyectos.count({
     where: {
       departamento: depto ? depto : undefined,
+      titulo: {
+        contains: titulo,
+      },
       anio_inicio:
         anio.length !== 0
           ? {

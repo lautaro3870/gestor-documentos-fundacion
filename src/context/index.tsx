@@ -23,6 +23,7 @@ const AppContext = createContext<{
   page: 1,
   setPage: () => {},
   filters: {
+    titulo: "",
     anio: [],
     area: [],
     departamento: "",
@@ -40,6 +41,7 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
   const [paginator, setPaginator] = useState<number>(0);
   const [page, setPage] = useState<number>(1);
   const [filters, setFilters] = useState<FilterProp>({
+    titulo: "",
     anio: [],
     area: [],
     departamento: "",

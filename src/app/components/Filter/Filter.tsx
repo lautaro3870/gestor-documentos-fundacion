@@ -44,18 +44,18 @@ export default function Filter({ areas, personal }: FilterProps) {
     <Box
       sx={{
         width: {
-          xl: "100%",
-          lg: "100%",
-          md: "100%",
-          xs: "80%",
+          xl: "90%",
+          lg: "90%",
+          md: "90%",
+          sm: "90%",
+          xs: "100%",
         },
-        maxWidth: "1200px",
         margin: "auto",
       }}
     >
       <Grid
         container
-        spacing={3}
+        spacing={1}
         sx={{
           display: "flex",
           justifyContent: "center",
@@ -63,6 +63,15 @@ export default function Filter({ areas, personal }: FilterProps) {
           marginBottom: "1rem",
         }}
       >
+        <Grid size={{ md: 2, lg: 2, xs: 12 }}>
+          <FormControl fullWidth>
+            <TextField
+              value={filters.titulo}
+              label="Título"
+              onChange={(e) => handleChangeFilter(e, "titulo")}
+            />
+          </FormControl>
+        </Grid>
         <Grid size={{ md: 2, lg: 3, xs: 12 }}>
           <FormControl fullWidth>
             <Autocomplete
@@ -125,7 +134,7 @@ export default function Filter({ areas, personal }: FilterProps) {
             </Select>
           </FormControl>
         </Grid>
-        <Grid size={{ md: 2, lg: 3, xs: 12 }}>
+        <Grid size={{ md: 2, lg: 2, xs: 12 }}>
           <FormControl fullWidth>
             <Autocomplete
               multiple
@@ -173,7 +182,7 @@ export default function Filter({ areas, personal }: FilterProps) {
             />
           </FormControl>
         </Grid>
-        <Grid size={{ md: 2, lg: 2, xs: 12 }}>
+        <Grid size={{ md: 2, lg: 1, xs: 12 }}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Año</InputLabel>
             <Select
@@ -197,7 +206,11 @@ export default function Filter({ areas, personal }: FilterProps) {
         </Grid>
         <Grid
           size={{ md: 2, lg: 2, xs: 12 }}
-          sx={{ display: "flex", flexDirection: "row", justifyContent: "center" }}
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
         >
           <Button
             variant="outlined"

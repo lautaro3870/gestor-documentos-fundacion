@@ -53,6 +53,7 @@ export type Personal = {
 };
 
 export type FilterProp = {
+  titulo: "",
   area: number[];
   departamento: string;
   personal: number[];

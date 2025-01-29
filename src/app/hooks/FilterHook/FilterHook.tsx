@@ -55,6 +55,11 @@ export default function FilterHook() {
           ...prevFilter,
           [filterType]: value,
         };
+      } else if (filterType === "titulo") {
+        return {
+          ...prevFilter,
+          [filterType]: value,
+        };
       } else {
         return prevFilter;
       }
@@ -70,6 +75,7 @@ export default function FilterHook() {
     localStorage.setItem("filters", JSON.stringify(filters));
     setIsLoading(true);
     const { projects, projectsCount } = await getProjectsFiltered(
+      filters.titulo,
       filters.area,
       filters.departamento,
       filters.personal,
@@ -78,10 +84,12 @@ export default function FilterHook() {
     setProjects(projects);
     setPaginator(projectsCount);
     setIsLoading(false);
+    setPage(1);
   };
 
   const handleCleanFilters = async (e: any) => {
     const filters: FilterProp = {
+      titulo: "",
       anio: [],
       area: [],
       departamento: "",
@@ -91,12 +99,13 @@ export default function FilterHook() {
     e.preventDefault();
     setIsLoading(true);
     setFilters({
+      titulo: "",
       area: [],
       departamento: "",
       personal: [],
       anio: [],
     });
-    const { projects, projectsCount } = await getProjectsFiltered([], "", [], []);
+    const { projects, projectsCount } = await getProjectsFiltered("", [], "", [], []);
     setProjects(projects);
     setPage(1);
     setPaginator(projectsCount);
