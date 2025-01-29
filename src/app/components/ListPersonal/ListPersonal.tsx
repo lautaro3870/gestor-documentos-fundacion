@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import styles from "../../page.module.css";
 import { PersonalxProyecto } from "@/utils/interfaces/interface";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Grid from "@mui/material/Grid2";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
@@ -18,6 +18,10 @@ type ListPersonalProps = {
 };
 
 export default function ListPersonal({ personal }: ListPersonalProps) {
+  const [orderPersonal, setOrderPersonal] = useState<
+    PersonalxProyecto[] | undefined
+  >([]);
+
   const typeOfCharge: Array<keyof PersonalxProyecto> = [
     "coordinador",
     "ConsultorAsociado",
@@ -43,6 +47,17 @@ export default function ListPersonal({ personal }: ListPersonalProps) {
     });
     return result;
   };
+
+  useEffect(() => {
+    const newList = personal?.sort(function (left: any, right: any) {
+      if (left.personal.perfil === null && right.personal.perfil !== null)
+        return 1;
+      if (left.personal.perfil !== null && right.personal.perfil === null)
+        return -1;
+      return 0;
+    });
+    setOrderPersonal(newList);
+  }, []);
 
   return (
     <Card
@@ -74,7 +89,7 @@ export default function ListPersonal({ personal }: ListPersonalProps) {
           </Typography>
         </CardContent>
       </Card>
-      {personal
+      {orderPersonal
         ?.map((autor: PersonalxProyecto, i: number) => (
           <Card
             key={i}

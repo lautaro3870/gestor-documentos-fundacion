@@ -7,21 +7,19 @@ import { useAppContext } from "@/context";
 export default function Paginator() {
   const { paginator, setPage, page } = useAppContext();
 
-  // React.useEffect(() => {
-  //   const fetchData = async() => {
-  //     const count = await getTotalProjectsCount();
-  //     setPaginator(count);
-  //   };
-  //   fetchData();
-  // }, [paginator]);
-
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   return (
     <Stack spacing={3}>
-      <Pagination count={Math.round(paginator / 5)} page={page} color="primary" onChange={handleChange}/>
+      <Pagination
+        count={Math.round(paginator / 5)}
+        page={page}
+        color="primary"
+        onChange={handleChange}
+      />
     </Stack>
   );
 }

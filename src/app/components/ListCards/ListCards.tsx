@@ -27,9 +27,44 @@ export default function ListCards({ listCards }: ListCardsProps) {
       <Grid container spacing={2}>
         {listCards?.map((card, index) => (
           <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
-            <Card key={index} sx={{ height: "25rem", paddingBottom: "1rem" }}>
+            <Card
+              key={index}
+              sx={{
+                height: "25rem",
+                paddingBottom: "1rem",
+                "&:hover": {
+                  backgroundColor: "#1e88e5",
+                  "& .card-title": {
+                    color: "white",
+                    transition: "color 0.5s ease",
+                  },
+                  "& .card-personal": {
+                    color: "white",
+                    transition: "color 0.5s ease",
+                  },
+                  "& .card-year": {
+                    color: "white",
+                  },
+                  "& .card-button": {
+                    color: "white",
+                    transition: "color 0.5s ease",
+                  },
+                  "& .card-button:hover": {
+                    transform: "scale(2)",
+                    transition: "transform 0.5s ease"
+                  },
+                },
+                "& .card-title, & .card-personal, & .card-year, & .card-button": {
+                  transition: "color 0.5s ease, transform 0.5s ease",
+                },
+              }}
+            >
               <CardContent key={index}>
-                <Typography variant="body2" sx={{ color: "text.primary" }}>
+                <Typography
+                  className="card-year"
+                  variant="body2"
+                  sx={{ color: "text.primary" }}
+                >
                   <span>
                     {" "}
                     {getMonthByNumber(card.mes_inicio || -1)?.mes}{" "}
@@ -38,6 +73,7 @@ export default function ListCards({ listCards }: ListCardsProps) {
                 </Typography>
                 <Typography
                   variant="body2"
+                  className="card-title"
                   sx={{
                     color: "text.primary",
                     height: "10rem",
@@ -63,6 +99,7 @@ export default function ListCards({ listCards }: ListCardsProps) {
                   >
                     <Typography
                       variant="body2"
+                      className="card-personal"
                       sx={{ color: "text.secondary" }}
                     >
                       {getPersonalList(card)}
@@ -70,7 +107,7 @@ export default function ListCards({ listCards }: ListCardsProps) {
                   </Grid>
                   <Grid size={3}>
                     <Link href={`/project/${card.id}`}>
-                      <Button>
+                      <Button className="card-button">
                         <AddIcon />
                       </Button>
                     </Link>
