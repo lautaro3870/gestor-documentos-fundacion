@@ -1,6 +1,5 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
@@ -10,6 +9,14 @@ import Link from "next/link";
 import { CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 import styles from "../../page.module.css";
+import { Document, Page, pdfjs } from "react-pdf";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+import "react-pdf/dist/Page/TextLayer.css";
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  "pdfjs-dist/build/pdf.worker.min.mjs",
+  import.meta.url
+).toString();
 
 type ListProjectsProps = {
   projects: ListCardsStruct[];
@@ -19,6 +26,7 @@ export default function ListProjects({ projects }: ListProjectsProps) {
   const { isLoading, page } = useAppContext();
   const projectsPerPage = 5;
   const [currentProjects, setCurrentProjects] = useState<ListCardsStruct[]>([]);
+  const [pdf, setPdf] = useState<any>(null);
 
   const getPersonalList = (card: ListCardsStruct) => {
     return card?.personal.map((p, index) => (
@@ -29,12 +37,19 @@ export default function ListProjects({ projects }: ListProjectsProps) {
     ));
   };
 
+  const getPdf = async () => {
+    const response = await fetch("/api/pdf-request");
+    const blob = await response.blob();
+    setPdf(blob);
+  };
+
   useEffect(() => {
     const currentProjects = projects.slice(
       (page - 1) * projectsPerPage,
       page * projectsPerPage
     );
     setCurrentProjects(currentProjects);
+    getPdf();
   }, [page]);
 
   useEffect(() => {
@@ -90,21 +105,12 @@ export default function ListProjects({ projects }: ListProjectsProps) {
                     }}
                     key={index}
                   >
-                    <CardMedia
-                      component="img"
-                      sx={{
-                        height: 100,
-                        width: 200,
-                        objectFit: "contain",
-                        display: {
-                          xs: "none",
-                          xl: "block",
-                          lg: "block",
-                        },
-                        marginLeft: "1rem",
-                      }}
-                      image="https://fundacionbariloche.org.ar/wp-content/uploads/2024/07/pdf.png"
-                    />
+                    <div style={{ margin: "1rem" }}>
+                      <Document file={pdf}>
+                        <Page pageNumber={1} width={200} scale={0.9} />
+                      </Document>
+                    </div>
+
                     <CardContent
                       sx={{
                         marginRight: "auto",

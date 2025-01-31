@@ -51,6 +51,7 @@ export default function Filter({ areas, personal }: FilterProps) {
           xs: "100%",
         },
         margin: "auto",
+        maxWidth: "1400px",
       }}
     >
       <Grid
