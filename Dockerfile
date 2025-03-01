@@ -1,39 +1,49 @@
-FROM node:18.20-bullseye-slim AS builder
-
-# Set working directory
+FROM node:18.20-bullseye-slim AS base
+FROM base AS deps
 WORKDIR /app
 
-# Permitir pasar DATABASE_URL como argumento
-ARG DATABASE_URL
-# Establecer DATABASE_URL en el entorno de build
-ENV DATABASE_URL=${DATABASE_URL}
+COPY package.json package-lock.json* ./
+COPY prisma ./prisma
+RUN npm ci --only=production && \
+    # Limpiar caché de npm para reducir tamaño
+    npm cache clean --force && \
+    # Instalar devDependencies solo para Prisma
+    npm install --no-save prisma
 
-# Copy package.json and package-lock.json
-COPY package.json package-lock.json ./
-COPY .env ./
-
-# Install dependencies
-RUN npm install
-
-# Copy all source code into the container
+FROM base AS builder
+WORKDIR /app
+# Copiar solo node_modules de producción
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/prisma ./prisma
 COPY . .
 
-# Build the Next.js application
-RUN npm run build
+# Variables de entorno para Prisma
+ARG DATABASE_URL
+ENV DATABASE_URL=${DATABASE_URL}
+ENV NODE_ENV=production
 
-# Stage 2: Production image
-FROM node:18.20-bullseye-slim AS production
+# Generar cliente Prisma y construir la aplicación
+RUN npx prisma generate && \
+    npm run build
 
-# Set working directory
+# Production image, copy all the files and run next
+FROM base AS runner
 WORKDIR /app
+ENV NODE_ENV=production
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
 
-# Copy only the necessary files from the build stage
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/package.json ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules/@prisma ./node_modules/@prisma
+RUN rm -rf /app/node_modules/.cache || true && \
+    # Crear enlaces simbólicos en lugar de copiar archivos grandes si es posible
+    find /app -type f -name "*.map" -delete
 
-# Expose the port that the app will run on
+USER nextjs
 EXPOSE 3000
+ENV PORT=3000
 
-# Start the application
-CMD ["npm", "start"]
+ENV HOSTNAME="0.0.0.0"
+CMD ["node", "server.js"]
