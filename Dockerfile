@@ -23,8 +23,7 @@ ENV DATABASE_URL=${DATABASE_URL}
 ENV NODE_ENV=production
 
 # Generar cliente Prisma y construir la aplicación
-RUN npx prisma generate && \
-    npm run build
+RUN npm run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
@@ -43,7 +42,5 @@ RUN rm -rf /app/node_modules/.cache || true && \
 
 USER nextjs
 EXPOSE 3000
-ENV PORT=3000
 
-ENV HOSTNAME="0.0.0.0"
 CMD ["node", "server.js"]
