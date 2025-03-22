@@ -140,7 +140,7 @@ export default function Project({ params }: { params: { id: string } }) {
                   },
                 }}
               >
-                {project.cita === null ? (
+                {!project.cita ? (
                   <div></div>
                 ) : (
                   <Box>

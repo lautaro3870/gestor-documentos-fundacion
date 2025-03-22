@@ -46,6 +46,7 @@ export default function DownloadLink({ project }: DownloadLinkProps) {
           alignItems: 'center',
           borderRadius: 6,
           backgroundColor: isHover ? '#1e88e5' : '#f5f5f5',
+          textDecoration: 'none'
         }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
