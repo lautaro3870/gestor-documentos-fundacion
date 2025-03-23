@@ -43,7 +43,7 @@ export default function MainPageHook() {
       );
       const areas = getAreas();
       const personal = getPersonal();
-      const cards = getDataForCards(0, 3);
+      const cards = getDataForCards(0, 9);
       Promise.all([projects, areas, personal, cards]).then((response) => {
         setProjects(response[0].projects);
         setAreas(response[1]);
