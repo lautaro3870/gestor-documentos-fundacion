@@ -34,7 +34,7 @@ export default function ListCards({ listCards }: ListCardsProps) {
 
   return (
     <Box sx={{ flexGrow: 1, padding: 2 }}>
-      <Carousel sx={{ width: '100%' }} >
+      <Carousel sx={{ width: '100%' }} navButtonsAlwaysInvisible={true}>
         {cardGroups?.map((group, groupIndex) => (
           <Grid container spacing={2} key={`group-${groupIndex}`}>
             {group.map((card, index) => (
@@ -113,7 +113,16 @@ export default function ListCards({ listCards }: ListCardsProps) {
                         <Typography
                           variant="body2"
                           className="card-personal"
-                          sx={{ color: 'text.secondary' }}
+                          sx={{
+                            color: 'text.secondary',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            display: '-webkit-box',
+                            WebkitLineClamp: 3, // Número de líneas a mostrar
+                            WebkitBoxOrient: 'vertical',
+                            lineHeight: '1.5em',
+                            maxHeight: '4.5em',
+                          }}
                         >
                           {getPersonalList(card)}
                         </Typography>
