@@ -8,6 +8,8 @@ import ListPersonal from '@/app/components/ListPersonal/ListPersonal';
 import DownloadLink from '@/app/components/DownloadLink/DownloadLink';
 import Grid from '@mui/material/Grid2';
 import { getMonthByNumber } from '@/utils/methods/serviceUtils';
+import { useAppContext } from '@/context';
+import { notFound } from 'next/navigation';
 
 export default function Project({ params }: { params: { id: string } }) {
   const [project, setProject] = useState<ListCardsStruct>({
@@ -25,12 +27,23 @@ export default function Project({ params }: { params: { id: string } }) {
     personal: [],
     titulo: '',
   });
+  const [error, setError] = useState(false);
+  const { isLoading, setIsLoading } = useAppContext();
 
   useEffect(() => {
     const getProject = async () => {
-      const project = await getProjectById(parseInt(params.id));
-      if (project) {
-        setProject(project);
+      try {
+        setIsLoading(true);
+        const project = await getProjectById(parseInt(params.id));
+        if (project) {
+          setProject(project);
+        } else {
+          setError(true);
+        }
+      } catch {
+        setError(true);
+      } finally {
+        setIsLoading(false);
       }
     };
     getProject();
@@ -56,9 +69,13 @@ export default function Project({ params }: { params: { id: string } }) {
     ));
   };
 
+  if (!isLoading && (error || !project)) {
+    notFound();
+  }
+
   return (
     <main className={project.personal?.length !== 0 ? '' : styles.mainLoading}>
-      {project.personal?.length === 0 ? (
+      {isLoading ? (
         <CircularProgress size="3rem" />
       ) : (
         <div
